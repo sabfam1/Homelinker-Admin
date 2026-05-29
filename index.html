@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HomeLink Admin</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@400;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Sora', sans-serif;
+    min-height: 100vh;
+    background: #0d1117;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 460px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .card-header {
+    background: #0d1117;
+    border-bottom: 1px solid #30363d;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .card-header .badge {
+    font-size: 1.6rem;
+  }
+  .card-header h1 {
+    font-size: 1.1rem;
+    color: #e6edf3;
+    font-weight: 700;
+  }
+  .card-header p {
+    font-size: 0.72rem;
+    color: #7d8590;
+    font-family: 'DM Mono', monospace;
+    margin-top: 2px;
+  }
+  .owner-tag {
+    margin-left: auto;
+    font-size: 0.65rem;
+    font-family: 'DM Mono', monospace;
+    color: #e3b341;
+    background: rgba(227,179,65,0.1);
+    border: 1px solid rgba(227,179,65,0.25);
+    border-radius: 20px;
+    padding: 3px 9px;
+    white-space: nowrap;
+  }
+
+  .card-body { padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label {
+    color: #7d8590; font-size: 0.7rem;
+    font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
+  }
+  .field input, .field textarea {
+    background: #0d1117; border: 1px solid #30363d; border-radius: 8px;
+    padding: 9px 12px; color: #e6edf3; font-family: 'DM Mono', monospace;
+    font-size: 0.78rem; outline: none; transition: border-color 0.2s; width: 100%;
+  }
+  .field input:focus, .field textarea:focus { border-color: #58a6ff; }
+  .field input::placeholder, .field textarea::placeholder { color: #484f58; }
+  .field textarea { resize: vertical; min-height: 80px; }
+
+  .row { display: flex; gap: 10px; }
+  .row .field { flex: 1; }
+
+  .parse-btn {
+    background: #21262d; border: 1px solid #30363d; color: #7d8590;
+    padding: 6px 12px; border-radius: 8px; cursor: pointer;
+    font-family: 'Sora', sans-serif; font-size: 0.75rem;
+    transition: border-color 0.2s, color 0.2s; align-self: flex-start;
+  }
+  .parse-btn:hover { border-color: #58a6ff; color: #58a6ff; }
+
+  .divider { display: flex; align-items: center; gap: 10px; color: #484f58; font-size: 0.72rem; }
+  .divider::before, .divider::after { content:''; flex:1; height:1px; background:#30363d; }
+
+  /* channel selector */
+  .channel-row {
+    display: flex; gap: 8px; align-items: center;
+  }
+  .channel-row input {
+    flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 8px;
+    padding: 9px 12px; color: #e6edf3; font-family: 'DM Mono', monospace;
+    font-size: 0.78rem; outline: none; transition: border-color 0.2s;
+  }
+  .channel-row input:focus { border-color: #58a6ff; }
+  .channel-row input::placeholder { color: #484f58; }
+
+  /* connect btn */
+  .connect-btn {
+    width: 100%; padding: 11px; border-radius: 10px; border: none;
+    background: #21262d; color: #7d8590; font-family: 'Sora', sans-serif;
+    font-weight: 600; font-size: 0.88rem; cursor: pointer; border: 1px solid #30363d;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .connect-btn:hover { background: #30363d; color: #e6edf3; border-color: #58a6ff; }
+  .connect-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* status line */
+  .status-line {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 0.72rem; font-family: 'DM Mono', monospace;
+    padding: 8px 12px; border-radius: 8px; background: #0d1117;
+    border: 1px solid #30363d;
+    display: none;
+  }
+  .status-line.show { display: flex; }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .status-dot.ok   { background: #3fb950; }
+  .status-dot.warn { background: #e3b341; animation: pulse 1.4s infinite; }
+  .status-dot.err  { background: #ff6b6b; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.35} }
+  .status-line span { color: #7d8590; }
+
+  /* preview panel */
+  #preview-panel { display: none; flex-direction: column; gap: 14px; }
+  #preview-panel.show { display: flex; }
+
+  .channel-badge {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #0d1117; border: 1px solid #30363d; border-radius: 10px; padding: 10px 14px;
+  }
+  .channel-badge .ch-name {
+    font-family: 'DM Mono', monospace; font-size: 0.8rem; color: #58a6ff;
+  }
+  .channel-badge .ch-meta {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #7d8590;
+  }
+
+  .stats-row {
+    display: flex; gap: 10px;
+  }
+  .stat-card {
+    flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 10px;
+    padding: 12px 14px; text-align: center;
+  }
+  .stat-card .stat-val {
+    font-size: 1.5rem; font-weight: 700; font-family: 'DM Mono', monospace;
+    color: #e6edf3; line-height: 1;
+  }
+  .stat-card .stat-lbl {
+    font-size: 0.65rem; color: #7d8590; margin-top: 4px; font-family: 'DM Mono', monospace;
+  }
+
+  /* danger zone */
+  .danger-zone {
+    border: 1px solid rgba(255,107,107,0.25);
+    border-radius: 12px; overflow: hidden;
+  }
+  .danger-header {
+    background: rgba(255,107,107,0.06);
+    border-bottom: 1px solid rgba(255,107,107,0.15);
+    padding: 10px 14px;
+    font-size: 0.72rem; font-family: 'DM Mono', monospace;
+    color: #ff6b6b; letter-spacing: 0.08em;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .danger-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .danger-body p { font-size: 0.78rem; color: #7d8590; line-height: 1.6; }
+  .danger-body p b { color: #c9d1d9; }
+
+  .clear-scope { display: flex; flex-direction: column; gap: 8px; }
+  .scope-opt {
+    display: flex; align-items: flex-start; gap: 10px; cursor: pointer;
+    background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 10px 12px;
+    transition: border-color 0.2s;
+  }
+  .scope-opt:hover { border-color: #ff6b6b44; }
+  .scope-opt input[type=radio] { margin-top: 2px; accent-color: #ff6b6b; flex-shrink: 0; cursor: pointer; }
+  .scope-opt .opt-label { font-size: 0.82rem; color: #e6edf3; font-weight: 600; }
+  .scope-opt .opt-desc  { font-size: 0.72rem; color: #7d8590; margin-top: 2px; font-family: 'DM Mono', monospace; }
+
+  /* confirm input */
+  .confirm-field { display: flex; flex-direction: column; gap: 5px; }
+  .confirm-field label { font-size: 0.72rem; color: #7d8590; font-family: 'DM Mono', monospace; }
+  .confirm-field input {
+    background: #0d1117; border: 1px solid rgba(255,107,107,0.3); border-radius: 8px;
+    padding: 9px 12px; color: #ff6b6b; font-family: 'DM Mono', monospace;
+    font-size: 0.82rem; outline: none; transition: border-color 0.2s; width: 100%;
+  }
+  .confirm-field input:focus { border-color: #ff6b6b; }
+  .confirm-field input::placeholder { color: rgba(255,107,107,0.3); }
+
+  .nuke-btn {
+    width: 100%; padding: 12px; border-radius: 10px; border: none;
+    background: rgba(255,107,107,0.08); color: #ff6b6b;
+    font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+    border: 1px solid rgba(255,107,107,0.3);
+    transition: background 0.2s, border-color 0.2s, transform 0.1s;
+  }
+  .nuke-btn:hover:not(:disabled) { background: rgba(255,107,107,0.16); border-color: #ff6b6b; transform: translateY(-1px); }
+  .nuke-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+
+  /* result */
+  .result-box {
+    border-radius: 10px; padding: 10px 14px;
+    font-size: 0.78rem; font-family: 'DM Mono', monospace;
+    display: none; line-height: 1.6;
+  }
+  .result-box.show { display: block; }
+  .result-box.ok  { background: rgba(63,185,80,0.08); border: 1px solid rgba(63,185,80,0.25); color: #3fb950; }
+  .result-box.err { background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.25); color: #ff6b6b; }
+
+  footer {
+    text-align: center; padding: 14px 24px;
+    font-size: 0.68rem; color: #484f58; font-family: 'DM Mono', monospace;
+    border-top: 1px solid #30363d;
+  }
+
+  /* ── PASSWORD GATE ── */
+  #gate {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #0d1117;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  #gate.unlocked { display: none; }
+
+  .gate-card {
+    width: 100%; max-width: 340px;
+    background: #161b22; border: 1px solid #30363d;
+    border-radius: 18px; overflow: hidden;
+  }
+  .gate-header {
+    background: #0d1117; border-bottom: 1px solid #30363d;
+    padding: 22px 24px; text-align: center;
+  }
+  .gate-header .lock-icon { font-size: 2rem; margin-bottom: 8px; }
+  .gate-header h2 { color: #e6edf3; font-size: 1rem; font-weight: 700; }
+  .gate-header p  { color: #7d8590; font-size: 0.72rem; margin-top: 4px; font-family: 'DM Mono', monospace; }
+
+  .gate-body { padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+
+  .gate-field { display: flex; flex-direction: column; gap: 5px; }
+  .gate-field label { color: #7d8590; font-size: 0.7rem; font-family: 'DM Mono', monospace; letter-spacing: 0.05em; }
+  .gate-field input {
+    background: #0d1117; border: 1px solid #30363d; border-radius: 8px;
+    padding: 10px 13px; color: #e6edf3; font-family: 'DM Mono', monospace;
+    font-size: 0.9rem; outline: none; transition: border-color 0.2s; width: 100%;
+    letter-spacing: 0.1em;
+  }
+  .gate-field input:focus { border-color: #58a6ff; }
+  .gate-field input.shake { animation: shake 0.35s ease; border-color: #ff6b6b !important; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20%      { transform: translateX(-8px); }
+    40%      { transform: translateX(8px); }
+    60%      { transform: translateX(-5px); }
+    80%      { transform: translateX(5px); }
+  }
+
+  .gate-err {
+    font-size: 0.72rem; font-family: 'DM Mono', monospace; color: #ff6b6b;
+    background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.2);
+    border-radius: 7px; padding: 7px 11px; display: none;
+  }
+  .gate-err.show { display: block; }
+
+  .gate-btn {
+    width: 100%; padding: 11px; border-radius: 10px; border: none;
+    background: #58a6ff; color: #0d1117; font-family: 'Sora', sans-serif;
+    font-weight: 700; font-size: 0.9rem; cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+  }
+  .gate-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .gate-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .gate-attempts {
+    text-align: center; font-size: 0.68rem; color: #484f58;
+    font-family: 'DM Mono', monospace;
+  }
+  .gate-attempts b { color: #e3b341; }
+
+  /* lockout overlay inside gate */
+  #lockout-msg {
+    display: none; text-align: center; padding: 8px 0;
+    font-size: 0.78rem; font-family: 'DM Mono', monospace;
+    color: #e3b341;
+  }
+  #lockout-msg.show { display: block; }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-header">
+      <div class="lock-icon">🔐</div>
+      <h2>HomeLink Admin</h2>
+      <p>owner access only</p>
+    </div>
+    <div class="gate-body">
+      <div class="gate-field">
+        <label>PASSWORD</label>
+        <input type="password" id="gate-input" placeholder="••••••••••"
+               onkeydown="if(event.key==='Enter')checkPassword()">
+      </div>
+      <div class="gate-err" id="gate-err">Incorrect password.</div>
+      <div id="lockout-msg"></div>
+      <button class="gate-btn" id="gate-btn" onclick="checkPassword()">Unlock →</button>
+      <p class="gate-attempts" id="gate-attempts" style="display:none">
+        <b id="attempts-left">5</b> attempts remaining before lockout
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="badge">🏠</div>
+    <div>
+      <h1>HomeLink Admin</h1>
+      <p>channel management & data tools</p>
+    </div>
+    <div class="owner-tag">⚙ owner only</div>
+  </div>
+
+  <div class="card-body">
+
+    <!-- Config paste -->
+    <div class="field">
+      <label>PASTE firebaseConfig JSON</label>
+      <textarea id="config-paste" placeholder='{
+  "apiKey": "AIza...",
+  "databaseURL": "https://myapp-default-rtdb.firebaseio.com",
+  "projectId": "myapp"
+}'></textarea>
+    </div>
+    <button class="parse-btn" onclick="parseConfig()">↓ Parse config</button>
+
+    <div class="divider">or fill manually</div>
+
+    <div class="row">
+      <div class="field">
+        <label>DATABASE URL</label>
+        <input id="f-dburl" type="text" placeholder="https://…firebaseio.com">
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label>API KEY</label>
+        <input id="f-apikey" type="text" placeholder="AIzaSy…">
+      </div>
+      <div class="field">
+        <label>PROJECT ID</label>
+        <input id="f-projid" type="text" placeholder="my-app">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>CHANNEL TO MANAGE</label>
+      <div class="channel-row">
+        <input id="f-channel" type="text" value="homelink-default" placeholder="homelink-default">
+      </div>
+    </div>
+
+    <div class="status-line" id="conn-status">
+      <div class="status-dot warn" id="conn-dot"></div>
+      <span id="conn-text">—</span>
+    </div>
+
+    <button class="connect-btn" id="conn-btn" onclick="connectAndLoad()">Connect &amp; inspect channel →</button>
+
+    <!-- Preview + actions (shown after connect) -->
+    <div id="preview-panel">
+
+      <div class="channel-badge">
+        <span class="ch-name" id="ch-display">—</span>
+        <span class="ch-meta" id="ch-meta">—</span>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-val" id="stat-msgs">—</div>
+          <div class="stat-lbl">messages</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" id="stat-media">—</div>
+          <div class="stat-lbl">images/pdfs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" id="stat-size">—</div>
+          <div class="stat-lbl">approx size</div>
+        </div>
+      </div>
+
+      <div class="danger-zone">
+        <div class="danger-header">⚠ DANGER ZONE — IRREVERSIBLE ACTIONS</div>
+        <div class="danger-body">
+          <p>Choose what to clear from channel <b id="ch-name-inline">—</b>. All operations are permanent and cannot be undone.</p>
+
+          <div class="clear-scope">
+            <label class="scope-opt">
+              <input type="radio" name="scope" value="messages" checked>
+              <div>
+                <div class="opt-label">Messages only</div>
+                <div class="opt-desc">Clears all chat messages. Leaves alerts + cleanup timestamps.</div>
+              </div>
+            </label>
+            <label class="scope-opt">
+              <input type="radio" name="scope" value="channel">
+              <div>
+                <div class="opt-label">Entire channel</div>
+                <div class="opt-desc">Wipes everything — messages, alerts, lastCleared. Full reset.</div>
+              </div>
+            </label>
+          </div>
+
+          <div class="confirm-field">
+            <label>TYPE THE CHANNEL NAME TO CONFIRM</label>
+            <input type="text" id="confirm-input" placeholder="homelink-default" oninput="checkConfirm()">
+          </div>
+
+          <button class="nuke-btn" id="nuke-btn" disabled onclick="executeClear()">
+            🗑 Clear channel
+          </button>
+
+          <div class="result-box" id="result-box"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <footer>homelink-admin · keep this file private · not linked from the main app</footer>
+</div>
+
+<!-- PASSWORD GATE LOGIC -->
+<script>
+  // Password is verified with PBKDF2-SHA256 (310,000 rounds) + a unique random salt.
+  // The salt means this hash won't appear in any rainbow table or online lookup.
+  // 310k rounds means brute-forcing takes ~seconds per guess instead of microseconds.
+  // Neither the password nor anything reversible to it is stored here.
+  const ADMIN_SALT = '8c28f13b3f3276785be04cc3383f41ed67f685d4480bfd207d85addd59592134';
+  const ADMIN_HASH = '02c75589a03db3ba9aa3093183be77d93d3752d7e624dee4c6bec324f4912be7';
+
+  const MAX_ATTEMPTS = 5;
+  const LOCKOUT_MS   = 10 * 60 * 1000; // 10 minutes
+
+  function getLockoutState() {
+    try {
+      const s = JSON.parse(sessionStorage.getItem('hl-admin-lockout') || '{}');
+      return s;
+    } catch { return {}; }
+  }
+  function saveLockoutState(s) {
+    sessionStorage.setItem('hl-admin-lockout', JSON.stringify(s));
+  }
+
+  async function pbkdf2Hash(password, saltHex) {
+    const enc = new TextEncoder();
+    const keyMaterial = await crypto.subtle.importKey(
+      'raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']
+    );
+    const saltBytes = new Uint8Array(saltHex.match(/.{2}/g).map(b => parseInt(b, 16)));
+    const bits = await crypto.subtle.deriveBits(
+      { name: 'PBKDF2', salt: saltBytes, iterations: 310000, hash: 'SHA-256' },
+      keyMaterial, 256
+    );
+    return [...new Uint8Array(bits)].map(x => x.toString(16).padStart(2,'0')).join('');
+  }
+
+  function startLockoutTimer(until) {
+    const btn = document.getElementById('gate-btn');
+    const inp = document.getElementById('gate-input');
+    const msg = document.getElementById('lockout-msg');
+    const attEl = document.getElementById('gate-attempts');
+    btn.disabled = true; inp.disabled = true; attEl.style.display = 'none';
+
+    const tick = () => {
+      const left = Math.max(0, until - Date.now());
+      if (left === 0) {
+        btn.disabled = false; inp.disabled = false;
+        inp.value = '';
+        msg.classList.remove('show');
+        const s = getLockoutState(); s.attempts = 0; saveLockoutState(s);
+        document.getElementById('gate-err').classList.remove('show');
+        return;
+      }
+      const m = Math.floor(left/60000), s2 = Math.floor((left%60000)/1000);
+      msg.textContent = `Too many attempts. Try again in ${m}:${String(s2).padStart(2,'0')}`;
+      msg.classList.add('show');
+      setTimeout(tick, 500);
+    };
+    tick();
+  }
+
+  window.checkPassword = async () => {
+    const input = document.getElementById('gate-input');
+    const btn   = document.getElementById('gate-btn');
+    const err   = document.getElementById('gate-err');
+    const attEl = document.getElementById('gate-attempts');
+    const attLeft = document.getElementById('attempts-left');
+
+    btn.disabled = true;
+    err.classList.remove('show');
+
+    const s = getLockoutState();
+    // Check lockout
+    if (s.lockedUntil && Date.now() < s.lockedUntil) {
+      startLockoutTimer(s.lockedUntil);
+      btn.disabled = true;
+      return;
+    }
+
+    const hash = await pbkdf2Hash(input.value, ADMIN_SALT);
+
+    if (hash === ADMIN_HASH) {
+      document.getElementById('gate').classList.add('unlocked');
+      sessionStorage.removeItem('hl-admin-lockout');
+    } else {
+      s.attempts = (s.attempts || 0) + 1;
+      const remaining = MAX_ATTEMPTS - s.attempts;
+
+      // Shake input
+      input.classList.add('shake');
+      setTimeout(() => input.classList.remove('shake'), 400);
+      input.value = '';
+
+      if (remaining <= 0) {
+        s.lockedUntil = Date.now() + LOCKOUT_MS;
+        saveLockoutState(s);
+        startLockoutTimer(s.lockedUntil);
+      } else {
+        saveLockoutState(s);
+        err.classList.add('show');
+        attEl.style.display = 'block';
+        attLeft.textContent = remaining;
+        btn.disabled = false;
+      }
+    }
+  };
+
+  // Check lockout on load
+  window.addEventListener('DOMContentLoaded', () => {
+    const s = getLockoutState();
+    if (s.lockedUntil && Date.now() < s.lockedUntil) {
+      startLockoutTimer(s.lockedUntil);
+    }
+    document.getElementById('gate-input').focus();
+  });
+</script>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, get, remove, set }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
+let db = null, currentChannel = null;
+
+// ── PARSE CONFIG ──
+window.parseConfig = () => {
+  const raw = document.getElementById('config-paste').value.trim();
+  try {
+    const jsonStr = raw.replace(/^[^{]*/,'').replace(/[^}]*$/,'');
+    const cfg = JSON.parse(jsonStr);
+    if (cfg.databaseURL) document.getElementById('f-dburl').value = cfg.databaseURL;
+    if (cfg.apiKey)      document.getElementById('f-apikey').value = cfg.apiKey;
+    if (cfg.projectId)   document.getElementById('f-projid').value = cfg.projectId;
+    setStatus('ok', 'Config parsed ✓');
+  } catch(e) {
+    setStatus('err', 'JSON parse failed: ' + e.message);
+  }
+};
+
+// ── CONNECT & INSPECT ──
+window.connectAndLoad = async () => {
+  const dbURL   = document.getElementById('f-dburl').value.trim();
+  const apiKey  = document.getElementById('f-apikey').value.trim();
+  const projId  = document.getElementById('f-projid').value.trim();
+  const channel = document.getElementById('f-channel').value.trim() || 'homelink-default';
+
+  if (!dbURL || !apiKey || !projId) { setStatus('err', 'Fill in Database URL, API Key, and Project ID'); return; }
+
+  const btn = document.getElementById('conn-btn');
+  btn.disabled = true; btn.textContent = 'Connecting…';
+  setStatus('warn', 'Connecting to Firebase…');
+  document.getElementById('preview-panel').classList.remove('show');
+
+  try {
+    const app = initializeApp({
+      apiKey, authDomain: `${projId}.firebaseapp.com`,
+      databaseURL: dbURL, projectId: projId,
+      storageBucket: `${projId}.appspot.com`
+    }, 'admin-' + Date.now());
+    db = getDatabase(app);
+    currentChannel = channel;
+
+    // Fetch channel snapshot for stats
+    const snap = await get(ref(db, channel));
+    const data = snap.exists() ? snap.val() : {};
+    const msgs = data.messages ? Object.values(data.messages) : [];
+    const mediaCount = msgs.filter(m => m.type === 'image' || m.type === 'pdf').length;
+
+    // Rough size estimate (JSON string length ÷ 1024)
+    const rawSize = JSON.stringify(data).length;
+    const sizeStr = rawSize < 1024 ? rawSize + ' B'
+                  : rawSize < 1024*1024 ? (rawSize/1024).toFixed(1) + ' KB'
+                  : (rawSize/(1024*1024)).toFixed(2) + ' MB';
+
+    const lastCleared = data.lastCleared ? new Date(data.lastCleared).toLocaleString() : 'never';
+
+    document.getElementById('ch-display').textContent = channel;
+    document.getElementById('ch-name-inline').textContent = channel;
+    document.getElementById('ch-meta').textContent = `last cleared: ${lastCleared}`;
+    document.getElementById('stat-msgs').textContent = msgs.length;
+    document.getElementById('stat-media').textContent = mediaCount;
+    document.getElementById('stat-size').textContent = sizeStr;
+    document.getElementById('confirm-input').placeholder = channel;
+    document.getElementById('confirm-input').value = '';
+    document.getElementById('nuke-btn').disabled = true;
+    document.getElementById('result-box').classList.remove('show');
+
+    document.getElementById('preview-panel').classList.add('show');
+    setStatus('ok', `Connected · channel "${channel}" loaded`);
+
+  } catch(e) {
+    setStatus('err', 'Connection failed: ' + e.message);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Connect & inspect channel →';
+  }
+};
+
+// ── CONFIRM CHECK ──
+window.checkConfirm = () => {
+  const val = document.getElementById('confirm-input').value.trim();
+  const match = val === currentChannel;
+  document.getElementById('nuke-btn').disabled = !match;
+};
+
+// ── EXECUTE CLEAR ──
+window.executeClear = async () => {
+  if (!db || !currentChannel) return;
+  const scope = document.querySelector('input[name=scope]:checked').value;
+  const btn = document.getElementById('nuke-btn');
+  btn.disabled = true; btn.textContent = '⏳ Clearing…';
+  setResult('', '');
+
+  try {
+    if (scope === 'messages') {
+      await remove(ref(db, `${currentChannel}/messages`));
+      await set(ref(db, `${currentChannel}/lastCleared`), Date.now());
+      showResult('ok', `✓ Messages cleared from "${currentChannel}"\nlastCleared timestamp updated.`);
+    } else {
+      await remove(ref(db, currentChannel));
+      showResult('ok', `✓ Entire channel "${currentChannel}" wiped.\nAll data removed.`);
+    }
+
+    // Reset stats
+    document.getElementById('stat-msgs').textContent = '0';
+    document.getElementById('stat-media').textContent = '0';
+    document.getElementById('stat-size').textContent = '—';
+    document.getElementById('confirm-input').value = '';
+    btn.disabled = true;
+
+  } catch(e) {
+    showResult('err', 'Clear failed: ' + e.message);
+    btn.disabled = false;
+  }
+  btn.textContent = '🗑 Clear channel';
+};
+
+// ── UI HELPERS ──
+function setStatus(level, msg) {
+  const line = document.getElementById('conn-status');
+  line.classList.add('show');
+  document.getElementById('conn-dot').className = 'status-dot ' + level;
+  document.getElementById('conn-text').textContent = msg;
+}
+
+function showResult(type, msg) {
+  const box = document.getElementById('result-box');
+  box.className = 'result-box show ' + type;
+  box.textContent = msg;
+}
+</script>
+</body>
+</html>
