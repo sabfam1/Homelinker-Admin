@@ -36,30 +36,17 @@
     align-items: center;
     gap: 12px;
   }
-  .card-header .badge {
-    font-size: 1.6rem;
-  }
-  .card-header h1 {
-    font-size: 1.1rem;
-    color: #e6edf3;
-    font-weight: 700;
-  }
+  .card-header .badge { font-size: 1.6rem; }
+  .card-header h1 { font-size: 1.1rem; color: #e6edf3; font-weight: 700; }
   .card-header p {
-    font-size: 0.72rem;
-    color: #7d8590;
-    font-family: 'DM Mono', monospace;
-    margin-top: 2px;
+    font-size: 0.72rem; color: #7d8590;
+    font-family: 'DM Mono', monospace; margin-top: 2px;
   }
   .owner-tag {
-    margin-left: auto;
-    font-size: 0.65rem;
-    font-family: 'DM Mono', monospace;
-    color: #e3b341;
-    background: rgba(227,179,65,0.1);
-    border: 1px solid rgba(227,179,65,0.25);
-    border-radius: 20px;
-    padding: 3px 9px;
-    white-space: nowrap;
+    margin-left: auto; font-size: 0.65rem;
+    font-family: 'DM Mono', monospace; color: #e3b341;
+    background: rgba(227,179,65,0.1); border: 1px solid rgba(227,179,65,0.25);
+    border-radius: 20px; padding: 3px 9px; white-space: nowrap;
   }
 
   .card-body { padding: 24px; display: flex; flex-direction: column; gap: 18px; }
@@ -92,10 +79,7 @@
   .divider { display: flex; align-items: center; gap: 10px; color: #484f58; font-size: 0.72rem; }
   .divider::before, .divider::after { content:''; flex:1; height:1px; background:#30363d; }
 
-  /* channel selector */
-  .channel-row {
-    display: flex; gap: 8px; align-items: center;
-  }
+  .channel-row { display: flex; gap: 8px; align-items: center; }
   .channel-row input {
     flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 8px;
     padding: 9px 12px; color: #e6edf3; font-family: 'DM Mono', monospace;
@@ -104,7 +88,6 @@
   .channel-row input:focus { border-color: #58a6ff; }
   .channel-row input::placeholder { color: #484f58; }
 
-  /* connect btn */
   .connect-btn {
     width: 100%; padding: 11px; border-radius: 10px; border: none;
     background: #21262d; color: #7d8590; font-family: 'Sora', sans-serif;
@@ -114,13 +97,11 @@
   .connect-btn:hover { background: #30363d; color: #e6edf3; border-color: #58a6ff; }
   .connect-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  /* status line */
   .status-line {
-    display: flex; align-items: center; gap: 7px;
+    display: none; align-items: center; gap: 7px;
     font-size: 0.72rem; font-family: 'DM Mono', monospace;
     padding: 8px 12px; border-radius: 8px; background: #0d1117;
     border: 1px solid #30363d;
-    display: none;
   }
   .status-line.show { display: flex; }
   .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
@@ -130,7 +111,6 @@
   @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.35} }
   .status-line span { color: #7d8590; }
 
-  /* preview panel */
   #preview-panel { display: none; flex-direction: column; gap: 14px; }
   #preview-panel.show { display: flex; }
 
@@ -138,16 +118,10 @@
     display: flex; align-items: center; justify-content: space-between;
     background: #0d1117; border: 1px solid #30363d; border-radius: 10px; padding: 10px 14px;
   }
-  .channel-badge .ch-name {
-    font-family: 'DM Mono', monospace; font-size: 0.8rem; color: #58a6ff;
-  }
-  .channel-badge .ch-meta {
-    font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #7d8590;
-  }
+  .channel-badge .ch-name { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: #58a6ff; }
+  .channel-badge .ch-meta { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #7d8590; }
 
-  .stats-row {
-    display: flex; gap: 10px;
-  }
+  .stats-row { display: flex; gap: 10px; }
   .stat-card {
     flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 10px;
     padding: 12px 14px; text-align: center;
@@ -156,22 +130,13 @@
     font-size: 1.5rem; font-weight: 700; font-family: 'DM Mono', monospace;
     color: #e6edf3; line-height: 1;
   }
-  .stat-card .stat-lbl {
-    font-size: 0.65rem; color: #7d8590; margin-top: 4px; font-family: 'DM Mono', monospace;
-  }
+  .stat-card .stat-lbl { font-size: 0.65rem; color: #7d8590; margin-top: 4px; font-family: 'DM Mono', monospace; }
 
-  /* danger zone */
-  .danger-zone {
-    border: 1px solid rgba(255,107,107,0.25);
-    border-radius: 12px; overflow: hidden;
-  }
+  .danger-zone { border: 1px solid rgba(255,107,107,0.25); border-radius: 12px; overflow: hidden; }
   .danger-header {
-    background: rgba(255,107,107,0.06);
-    border-bottom: 1px solid rgba(255,107,107,0.15);
-    padding: 10px 14px;
-    font-size: 0.72rem; font-family: 'DM Mono', monospace;
-    color: #ff6b6b; letter-spacing: 0.08em;
-    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,107,107,0.06); border-bottom: 1px solid rgba(255,107,107,0.15);
+    padding: 10px 14px; font-size: 0.72rem; font-family: 'DM Mono', monospace;
+    color: #ff6b6b; letter-spacing: 0.08em; display: flex; align-items: center; gap: 6px;
   }
   .danger-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
   .danger-body p { font-size: 0.78rem; color: #7d8590; line-height: 1.6; }
@@ -188,7 +153,6 @@
   .scope-opt .opt-label { font-size: 0.82rem; color: #e6edf3; font-weight: 600; }
   .scope-opt .opt-desc  { font-size: 0.72rem; color: #7d8590; margin-top: 2px; font-family: 'DM Mono', monospace; }
 
-  /* confirm input */
   .confirm-field { display: flex; flex-direction: column; gap: 5px; }
   .confirm-field label { font-size: 0.72rem; color: #7d8590; font-family: 'DM Mono', monospace; }
   .confirm-field input {
@@ -209,15 +173,23 @@
   .nuke-btn:hover:not(:disabled) { background: rgba(255,107,107,0.16); border-color: #ff6b6b; transform: translateY(-1px); }
   .nuke-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
 
-  /* result */
   .result-box {
     border-radius: 10px; padding: 10px 14px;
     font-size: 0.78rem; font-family: 'DM Mono', monospace;
-    display: none; line-height: 1.6;
+    display: none; line-height: 1.6; white-space: pre-wrap;
   }
   .result-box.show { display: block; }
   .result-box.ok  { background: rgba(63,185,80,0.08); border: 1px solid rgba(63,185,80,0.25); color: #3fb950; }
   .result-box.err { background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.25); color: #ff6b6b; }
+
+  /* DB rules hint */
+  .rules-hint {
+    font-size: 0.72rem; font-family: 'DM Mono', monospace; color: #e3b341;
+    background: rgba(227,179,65,0.07); border: 1px solid rgba(227,179,65,0.2);
+    border-radius: 8px; padding: 9px 12px; display: none; line-height: 1.6;
+  }
+  .rules-hint.show { display: block; }
+  .rules-hint code { background: rgba(227,179,65,0.12); padding: 1px 5px; border-radius: 4px; }
 
   footer {
     text-align: center; padding: 14px 24px;
@@ -225,7 +197,7 @@
     border-top: 1px solid #30363d;
   }
 
-  /* ── PASSWORD GATE ── */
+  /* PASSWORD GATE */
   #gate {
     position: fixed; inset: 0; z-index: 9999;
     background: #0d1117;
@@ -248,7 +220,6 @@
   .gate-header p  { color: #7d8590; font-size: 0.72rem; margin-top: 4px; font-family: 'DM Mono', monospace; }
 
   .gate-body { padding: 24px; display: flex; flex-direction: column; gap: 14px; }
-
   .gate-field { display: flex; flex-direction: column; gap: 5px; }
   .gate-field label { color: #7d8590; font-size: 0.7rem; font-family: 'DM Mono', monospace; letter-spacing: 0.05em; }
   .gate-field input {
@@ -289,11 +260,9 @@
   }
   .gate-attempts b { color: #e3b341; }
 
-  /* lockout overlay inside gate */
   #lockout-msg {
     display: none; text-align: center; padding: 8px 0;
-    font-size: 0.78rem; font-family: 'DM Mono', monospace;
-    color: #e3b341;
+    font-size: 0.78rem; font-family: 'DM Mono', monospace; color: #e3b341;
   }
   #lockout-msg.show { display: block; }
 </style>
@@ -336,7 +305,6 @@
 
   <div class="card-body">
 
-    <!-- Config paste -->
     <div class="field">
       <label>PASTE firebaseConfig JSON</label>
       <textarea id="config-paste" placeholder='{
@@ -373,6 +341,14 @@
       </div>
     </div>
 
+    <!-- DB Rules hint shown on permission error -->
+    <div class="rules-hint" id="rules-hint">
+      ⚠ Permission denied. Your Firebase Realtime Database rules likely require auth.<br><br>
+      To allow this admin tool, temporarily set rules to:<br>
+      <code>{ "rules": { ".read": true, ".write": true } }</code><br><br>
+      Or add a rule scoped to your channel path. Remember to re-lock when done.
+    </div>
+
     <div class="status-line" id="conn-status">
       <div class="status-dot warn" id="conn-dot"></div>
       <span id="conn-text">—</span>
@@ -380,7 +356,6 @@
 
     <button class="connect-btn" id="conn-btn" onclick="connectAndLoad()">Connect &amp; inspect channel →</button>
 
-    <!-- Preview + actions (shown after connect) -->
     <div id="preview-panel">
 
       <div class="channel-badge">
@@ -445,31 +420,20 @@
 
 <!-- PASSWORD GATE LOGIC -->
 <script>
-  // Password is verified with PBKDF2-SHA256 (310,000 rounds) + a unique random salt.
-  // The salt means this hash won't appear in any rainbow table or online lookup.
-  // 310k rounds means brute-forcing takes ~seconds per guess instead of microseconds.
-  // Neither the password nor anything reversible to it is stored here.
   const ADMIN_SALT = '8c28f13b3f3276785be04cc3383f41ed67f685d4480bfd207d85addd59592134';
   const ADMIN_HASH = '02c75589a03db3ba9aa3093183be77d93d3752d7e624dee4c6bec324f4912be7';
-
   const MAX_ATTEMPTS = 5;
-  const LOCKOUT_MS   = 10 * 60 * 1000; // 10 minutes
+  const LOCKOUT_MS   = 10 * 60 * 1000;
 
   function getLockoutState() {
-    try {
-      const s = JSON.parse(sessionStorage.getItem('hl-admin-lockout') || '{}');
-      return s;
-    } catch { return {}; }
+    try { return JSON.parse(sessionStorage.getItem('hl-admin-lockout') || '{}'); }
+    catch { return {}; }
   }
-  function saveLockoutState(s) {
-    sessionStorage.setItem('hl-admin-lockout', JSON.stringify(s));
-  }
+  function saveLockoutState(s) { sessionStorage.setItem('hl-admin-lockout', JSON.stringify(s)); }
 
   async function pbkdf2Hash(password, saltHex) {
     const enc = new TextEncoder();
-    const keyMaterial = await crypto.subtle.importKey(
-      'raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']
-    );
+    const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']);
     const saltBytes = new Uint8Array(saltHex.match(/.{2}/g).map(b => parseInt(b, 16)));
     const bits = await crypto.subtle.deriveBits(
       { name: 'PBKDF2', salt: saltBytes, iterations: 310000, hash: 'SHA-256' },
@@ -484,12 +448,10 @@
     const msg = document.getElementById('lockout-msg');
     const attEl = document.getElementById('gate-attempts');
     btn.disabled = true; inp.disabled = true; attEl.style.display = 'none';
-
     const tick = () => {
       const left = Math.max(0, until - Date.now());
       if (left === 0) {
-        btn.disabled = false; inp.disabled = false;
-        inp.value = '';
+        btn.disabled = false; inp.disabled = false; inp.value = '';
         msg.classList.remove('show');
         const s = getLockoutState(); s.attempts = 0; saveLockoutState(s);
         document.getElementById('gate-err').classList.remove('show');
@@ -509,32 +471,20 @@
     const err   = document.getElementById('gate-err');
     const attEl = document.getElementById('gate-attempts');
     const attLeft = document.getElementById('attempts-left');
-
     btn.disabled = true;
     err.classList.remove('show');
-
     const s = getLockoutState();
-    // Check lockout
-    if (s.lockedUntil && Date.now() < s.lockedUntil) {
-      startLockoutTimer(s.lockedUntil);
-      btn.disabled = true;
-      return;
-    }
-
+    if (s.lockedUntil && Date.now() < s.lockedUntil) { startLockoutTimer(s.lockedUntil); return; }
     const hash = await pbkdf2Hash(input.value, ADMIN_SALT);
-
     if (hash === ADMIN_HASH) {
       document.getElementById('gate').classList.add('unlocked');
       sessionStorage.removeItem('hl-admin-lockout');
     } else {
       s.attempts = (s.attempts || 0) + 1;
       const remaining = MAX_ATTEMPTS - s.attempts;
-
-      // Shake input
       input.classList.add('shake');
       setTimeout(() => input.classList.remove('shake'), 400);
       input.value = '';
-
       if (remaining <= 0) {
         s.lockedUntil = Date.now() + LOCKOUT_MS;
         saveLockoutState(s);
@@ -549,22 +499,37 @@
     }
   };
 
-  // Check lockout on load
   window.addEventListener('DOMContentLoaded', () => {
     const s = getLockoutState();
-    if (s.lockedUntil && Date.now() < s.lockedUntil) {
-      startLockoutTimer(s.lockedUntil);
-    }
+    if (s.lockedUntil && Date.now() < s.lockedUntil) startLockoutTimer(s.lockedUntil);
     document.getElementById('gate-input').focus();
   });
 </script>
 
 <script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { initializeApp, getApps, deleteApp }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getDatabase, ref, get, remove, set }
   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
-let db = null, currentChannel = null;
+let db = null, currentChannel = null, currentApp = null;
+
+// ── UI HELPERS ──
+function setStatus(level, msg) {
+  const line = document.getElementById('conn-status');
+  line.classList.add('show');
+  document.getElementById('conn-dot').className = 'status-dot ' + level;
+  document.getElementById('conn-text').textContent = msg;
+}
+
+function showResult(type, msg) {
+  const box = document.getElementById('result-box');
+  box.className = 'result-box show ' + type;
+  box.textContent = msg;
+}
+
+function hideRulesHint() { document.getElementById('rules-hint').classList.remove('show'); }
+function showRulesHint() { document.getElementById('rules-hint').classList.add('show'); }
 
 // ── PARSE CONFIG ──
 window.parseConfig = () => {
@@ -576,6 +541,7 @@ window.parseConfig = () => {
     if (cfg.apiKey)      document.getElementById('f-apikey').value = cfg.apiKey;
     if (cfg.projectId)   document.getElementById('f-projid').value = cfg.projectId;
     setStatus('ok', 'Config parsed ✓');
+    hideRulesHint();
   } catch(e) {
     setStatus('err', 'JSON parse failed: ' + e.message);
   }
@@ -588,34 +554,43 @@ window.connectAndLoad = async () => {
   const projId  = document.getElementById('f-projid').value.trim();
   const channel = document.getElementById('f-channel').value.trim() || 'homelink-default';
 
-  if (!dbURL || !apiKey || !projId) { setStatus('err', 'Fill in Database URL, API Key, and Project ID'); return; }
+  if (!dbURL || !apiKey || !projId) {
+    setStatus('err', 'Fill in Database URL, API Key, and Project ID');
+    return;
+  }
 
   const btn = document.getElementById('conn-btn');
-  btn.disabled = true; btn.textContent = 'Connecting…';
+  btn.disabled = true;
+  btn.textContent = 'Connecting…';
   setStatus('warn', 'Connecting to Firebase…');
   document.getElementById('preview-panel').classList.remove('show');
+  hideRulesHint();
 
   try {
-    const app = initializeApp({
-      apiKey, authDomain: `${projId}.firebaseapp.com`,
-      databaseURL: dbURL, projectId: projId,
+    // Clean up any previous app instance to avoid "already exists" errors
+    if (currentApp) {
+      try { await deleteApp(currentApp); } catch(_) {}
+    }
+
+    currentApp = initializeApp({
+      apiKey,
+      authDomain: `${projId}.firebaseapp.com`,
+      databaseURL: dbURL,
+      projectId: projId,
       storageBucket: `${projId}.appspot.com`
     }, 'admin-' + Date.now());
-    db = getDatabase(app);
+
+    db = getDatabase(currentApp);
     currentChannel = channel;
 
-    // Fetch channel snapshot for stats
     const snap = await get(ref(db, channel));
     const data = snap.exists() ? snap.val() : {};
     const msgs = data.messages ? Object.values(data.messages) : [];
     const mediaCount = msgs.filter(m => m.type === 'image' || m.type === 'pdf').length;
-
-    // Rough size estimate (JSON string length ÷ 1024)
     const rawSize = JSON.stringify(data).length;
     const sizeStr = rawSize < 1024 ? rawSize + ' B'
                   : rawSize < 1024*1024 ? (rawSize/1024).toFixed(1) + ' KB'
                   : (rawSize/(1024*1024)).toFixed(2) + ' MB';
-
     const lastCleared = data.lastCleared ? new Date(data.lastCleared).toLocaleString() : 'never';
 
     document.getElementById('ch-display').textContent = channel;
@@ -633,64 +608,76 @@ window.connectAndLoad = async () => {
     setStatus('ok', `Connected · channel "${channel}" loaded`);
 
   } catch(e) {
-    setStatus('err', 'Connection failed: ' + e.message);
+    const msg = e.message || String(e);
+    setStatus('err', 'Connection failed: ' + msg);
+    if (msg.includes('permission') || msg.includes('PERMISSION_DENIED') || msg.includes('denied')) {
+      showRulesHint();
+    }
+    db = null;
+    currentChannel = null;
   } finally {
-    btn.disabled = false; btn.textContent = 'Connect & inspect channel →';
+    btn.disabled = false;
+    btn.textContent = 'Connect & inspect channel →';
   }
 };
 
 // ── CONFIRM CHECK ──
 window.checkConfirm = () => {
   const val = document.getElementById('confirm-input').value.trim();
-  const match = val === currentChannel;
-  document.getElementById('nuke-btn').disabled = !match;
+  document.getElementById('nuke-btn').disabled = (val !== currentChannel);
 };
 
 // ── EXECUTE CLEAR ──
 window.executeClear = async () => {
-  if (!db || !currentChannel) return;
+  if (!db || !currentChannel) {
+    showResult('err', 'Not connected. Please connect first.');
+    return;
+  }
+
   const scope = document.querySelector('input[name=scope]:checked').value;
   const btn = document.getElementById('nuke-btn');
-  btn.disabled = true; btn.textContent = '⏳ Clearing…';
-  setResult('', '');
+  btn.disabled = true;
+  btn.textContent = '⏳ Clearing…';
+
+  // Hide previous result
+  const box = document.getElementById('result-box');
+  box.className = 'result-box';
 
   try {
     if (scope === 'messages') {
-      await remove(ref(db, `${currentChannel}/messages`));
-      await set(ref(db, `${currentChannel}/lastCleared`), Date.now());
+      const msgRef = ref(db, `${currentChannel}/messages`);
+      await remove(msgRef);
+      // Update lastCleared timestamp
+      const clearedRef = ref(db, `${currentChannel}/lastCleared`);
+      await set(clearedRef, Date.now());
       showResult('ok', `✓ Messages cleared from "${currentChannel}"\nlastCleared timestamp updated.`);
+      document.getElementById('stat-msgs').textContent = '0';
+      document.getElementById('stat-media').textContent = '0';
+      document.getElementById('stat-size').textContent = '< 1 B';
     } else {
-      await remove(ref(db, currentChannel));
+      const channelRef = ref(db, currentChannel);
+      await remove(channelRef);
       showResult('ok', `✓ Entire channel "${currentChannel}" wiped.\nAll data removed.`);
+      document.getElementById('stat-msgs').textContent = '0';
+      document.getElementById('stat-media').textContent = '0';
+      document.getElementById('stat-size').textContent = '0 B';
     }
 
-    // Reset stats
-    document.getElementById('stat-msgs').textContent = '0';
-    document.getElementById('stat-media').textContent = '0';
-    document.getElementById('stat-size').textContent = '—';
     document.getElementById('confirm-input').value = '';
-    btn.disabled = true;
+    btn.disabled = true; // keep disabled — confirmed name was cleared
 
   } catch(e) {
-    showResult('err', 'Clear failed: ' + e.message);
-    btn.disabled = false;
+    const msg = e.message || String(e);
+    showResult('err', 'Clear failed: ' + msg);
+    if (msg.includes('permission') || msg.includes('PERMISSION_DENIED') || msg.includes('denied')) {
+      showRulesHint();
+    }
+    // Re-enable only if confirmation still matches
+    window.checkConfirm();
   }
+
   btn.textContent = '🗑 Clear channel';
 };
-
-// ── UI HELPERS ──
-function setStatus(level, msg) {
-  const line = document.getElementById('conn-status');
-  line.classList.add('show');
-  document.getElementById('conn-dot').className = 'status-dot ' + level;
-  document.getElementById('conn-text').textContent = msg;
-}
-
-function showResult(type, msg) {
-  const box = document.getElementById('result-box');
-  box.className = 'result-box show ' + type;
-  box.textContent = msg;
-}
 </script>
 </body>
 </html>
