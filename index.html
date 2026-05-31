@@ -715,15 +715,17 @@
     try {
       const saved = JSON.parse(localStorage.getItem(CONFIG_KEY));
       if (saved && saved.apiKey && saved.databaseURL && saved.projectId) {
-        // Show saved badge and skip to channel screen
+        // Show saved badge on config screen
         document.getElementById('sb-proj-text').textContent = saved.projectId;
         document.getElementById('sb-url-text').textContent = saved.databaseURL;
         document.getElementById('saved-badge').style.display = 'flex';
         document.getElementById('config-fields').style.display = 'none';
-        // Pre-fill fields anyway for if user clears
+        // Pre-fill fields in case user clears saved config
         document.getElementById('f-dburl').value = saved.databaseURL;
         document.getElementById('f-apikey').value = saved.apiKey;
         document.getElementById('f-projid').value = saved.projectId;
+        // Init Firebase and jump to channel screen (AFTER gate is unlocked)
+        if (typeof window.initFromSaved === 'function') window.initFromSaved();
       }
     } catch(e) {}
   }
@@ -822,8 +824,8 @@ window.connectFirebase = async () => {
     firebaseCfg = { apiKey, authDomain:`${projId}.firebaseapp.com`, databaseURL:dbURL, projectId:projId, storageBucket:`${projId}.appspot.com` };
     currentApp = initializeApp(firebaseCfg, 'admin-'+Date.now());
     db = getDatabase(currentApp);
-    // Quick test read
-    await get(ref(db, '.info/connected'));
+    // Quick test read — use a harmless channel path, not .info/connected (incompatible with get())
+    await get(ref(db, '__admin_ping__'));
     if (shouldSave) {
       localStorage.setItem(CONFIG_KEY, JSON.stringify({ apiKey, databaseURL:dbURL, projectId:projId }));
     }
@@ -839,19 +841,22 @@ window.connectFirebase = async () => {
   } finally { btn.disabled=false; btn.textContent='Connect to Firebase →'; }
 };
 
-// Auto-connect if saved config exists
-(async () => {
+// initFromSaved is called AFTER the password gate is unlocked
+window.initFromSaved = () => {
   try {
     const saved = JSON.parse(localStorage.getItem(CONFIG_KEY));
     if (saved && saved.apiKey && saved.databaseURL && saved.projectId) {
       firebaseCfg = { apiKey:saved.apiKey, authDomain:`${saved.projectId}.firebaseapp.com`, databaseURL:saved.databaseURL, projectId:saved.projectId, storageBucket:`${saved.projectId}.appspot.com` };
+      if (currentApp) { try { deleteApp(currentApp); } catch(_){} }
       currentApp = initializeApp(firebaseCfg, 'admin-'+Date.now());
       db = getDatabase(currentApp);
       document.getElementById('ch-screen-proj').textContent = saved.projectId;
       document.getElementById('ch-screen-url').textContent = saved.databaseURL;
+      showScreen('screen-channel');
+      setStatusCh('ok','Firebase connected ✓ (saved config)');
     }
   } catch(e) {}
-})();
+};
 
 // ── SCAN CHANNELS ──
 window.scanChannels = async () => {
