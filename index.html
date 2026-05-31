@@ -8,7 +8,7 @@
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@400;600;700&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family:'Sora',sans-serif; min-height:100vh; background:#0d1117; display:flex; align-items:center; justify-content:center; padding:24px 16px; }
-  .card { width:100%; max-width:520px; background:#161b22; border:1px solid #30363d; border-radius:18px; overflow:hidden; }
+  .card { width:100%; max-width:560px; background:#161b22; border:1px solid #30363d; border-radius:18px; overflow:hidden; }
   .card-header { background:#0d1117; border-bottom:1px solid #30363d; padding:20px 24px; display:flex; align-items:center; gap:12px; }
   .card-header .badge { font-size:1.6rem; }
   .card-header h1 { font-size:1.1rem; color:#e6edf3; font-weight:700; }
@@ -33,6 +33,8 @@
   .connect-btn { width:100%; padding:11px; border-radius:10px; border:1px solid #30363d; background:#21262d; color:#7d8590; font-family:'Sora',sans-serif; font-weight:600; font-size:0.88rem; cursor:pointer; transition:background 0.2s,color 0.2s,border-color 0.2s; }
   .connect-btn:hover { background:#30363d; color:#e6edf3; border-color:#58a6ff; }
   .connect-btn:disabled { opacity:0.4; cursor:not-allowed; }
+  .connect-btn.primary { background:#58a6ff; color:#0d1117; border-color:#58a6ff; font-weight:700; }
+  .connect-btn.primary:hover { opacity:0.9; background:#58a6ff; color:#0d1117; }
   .status-line { display:none; align-items:center; gap:7px; font-size:0.72rem; font-family:'DM Mono',monospace; padding:8px 12px; border-radius:8px; background:#0d1117; border:1px solid #30363d; }
   .status-line.show { display:flex; }
   .status-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
@@ -50,19 +52,13 @@
   .stat-card { flex:1; min-width:80px; background:#0d1117; border:1px solid #30363d; border-radius:10px; padding:12px 14px; text-align:center; }
   .stat-card .stat-val { font-size:1.4rem; font-weight:700; font-family:'DM Mono',monospace; color:#e6edf3; line-height:1; }
   .stat-card .stat-lbl { font-size:0.62rem; color:#7d8590; margin-top:4px; font-family:'DM Mono',monospace; }
-
-  /* ── TABS ── */
-  .tabs { display:flex; gap:4px; background:#0d1117; border:1px solid #30363d; border-radius:10px; padding:4px; }
-  .tab-btn { flex:1; padding:7px 10px; border:none; border-radius:7px; background:transparent; color:#7d8590; font-family:'Sora',sans-serif; font-size:0.78rem; font-weight:600; cursor:pointer; transition:background 0.2s,color 0.2s; }
+  .tabs { display:flex; gap:4px; background:#0d1117; border:1px solid #30363d; border-radius:10px; padding:4px; flex-wrap:wrap; }
+  .tab-btn { flex:1; min-width:60px; padding:7px 6px; border:none; border-radius:7px; background:transparent; color:#7d8590; font-family:'Sora',sans-serif; font-size:0.73rem; font-weight:600; cursor:pointer; transition:background 0.2s,color 0.2s; white-space:nowrap; }
   .tab-btn.active { background:#21262d; color:#e6edf3; }
   .tab-btn:hover:not(.active) { color:#c9d1d9; }
   .tab-pane { display:none; flex-direction:column; gap:14px; }
   .tab-pane.active { display:flex; }
-
-  /* ── SECTION LABEL ── */
   .section-label { font-size:0.65rem; font-family:'DM Mono',monospace; color:#484f58; letter-spacing:0.1em; text-transform:uppercase; padding-bottom:2px; border-bottom:1px solid #21262d; }
-
-  /* ── DANGER ZONE ── */
   .danger-zone { border:1px solid rgba(255,107,107,0.25); border-radius:12px; overflow:hidden; }
   .danger-header { background:rgba(255,107,107,0.06); border-bottom:1px solid rgba(255,107,107,0.15); padding:10px 14px; font-size:0.72rem; font-family:'DM Mono',monospace; color:#ff6b6b; letter-spacing:0.08em; display:flex; align-items:center; gap:6px; }
   .danger-body { padding:14px; display:flex; flex-direction:column; gap:10px; }
@@ -82,8 +78,6 @@
   .nuke-btn { width:100%; padding:12px; border-radius:10px; border:1px solid rgba(255,107,107,0.3); background:rgba(255,107,107,0.08); color:#ff6b6b; font-family:'Sora',sans-serif; font-weight:700; font-size:0.9rem; cursor:pointer; transition:background 0.2s,border-color 0.2s,transform 0.1s; }
   .nuke-btn:hover:not(:disabled) { background:rgba(255,107,107,0.16); border-color:#ff6b6b; transform:translateY(-1px); }
   .nuke-btn:disabled { opacity:0.3; cursor:not-allowed; transform:none; }
-
-  /* ── BROADCAST ZONE ── */
   .broadcast-zone { border:1px solid rgba(88,166,255,0.25); border-radius:12px; overflow:hidden; }
   .broadcast-header { background:rgba(88,166,255,0.06); border-bottom:1px solid rgba(88,166,255,0.15); padding:10px 14px; font-size:0.72rem; font-family:'DM Mono',monospace; color:#58a6ff; letter-spacing:0.08em; }
   .broadcast-body { padding:14px; display:flex; flex-direction:column; gap:10px; }
@@ -98,8 +92,6 @@
   .sender-opt:hover { border-color:#58a6ff44; }
   .sender-opt input[type=radio] { accent-color:#58a6ff; cursor:pointer; }
   .sender-opt span { font-size:0.8rem; color:#e6edf3; }
-
-  /* ── EXPORT ZONE ── */
   .export-zone { border:1px solid rgba(63,185,80,0.25); border-radius:12px; overflow:hidden; }
   .export-header { background:rgba(63,185,80,0.06); border-bottom:1px solid rgba(63,185,80,0.15); padding:10px 14px; font-size:0.72rem; font-family:'DM Mono',monospace; color:#3fb950; letter-spacing:0.08em; }
   .export-body { padding:14px; display:flex; flex-direction:column; gap:10px; }
@@ -108,8 +100,6 @@
   .export-btn:disabled { opacity:0.3; cursor:not-allowed; }
   .export-preview { background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:10px 12px; font-family:'DM Mono',monospace; font-size:0.72rem; color:#7d8590; max-height:160px; overflow-y:auto; white-space:pre; display:none; }
   .export-preview.show { display:block; }
-
-  /* ── CHANNEL RENAME ── */
   .rename-zone { border:1px solid rgba(227,179,65,0.25); border-radius:12px; overflow:hidden; }
   .rename-header { background:rgba(227,179,65,0.06); border-bottom:1px solid rgba(227,179,65,0.15); padding:10px 14px; font-size:0.72rem; font-family:'DM Mono',monospace; color:#e3b341; letter-spacing:0.08em; }
   .rename-body { padding:14px; display:flex; flex-direction:column; gap:10px; }
@@ -121,8 +111,6 @@
   .rename-btn { padding:9px 16px; border-radius:8px; border:1px solid rgba(227,179,65,0.3); background:rgba(227,179,65,0.08); color:#e3b341; font-family:'Sora',sans-serif; font-weight:700; font-size:0.82rem; cursor:pointer; white-space:nowrap; transition:background 0.2s,border-color 0.2s; }
   .rename-btn:hover:not(:disabled) { background:rgba(227,179,65,0.16); border-color:#e3b341; }
   .rename-btn:disabled { opacity:0.3; cursor:not-allowed; }
-
-  /* ── SESSION ZONE ── */
   .session-zone { border:1px solid rgba(163,113,247,0.25); border-radius:12px; overflow:hidden; }
   .session-header { background:rgba(163,113,247,0.06); border-bottom:1px solid rgba(163,113,247,0.15); padding:10px 14px; font-size:0.72rem; font-family:'DM Mono',monospace; color:#a371f7; letter-spacing:0.08em; }
   .session-body { padding:14px; display:flex; flex-direction:column; gap:10px; }
@@ -130,11 +118,8 @@
   .session-table { width:100%; border-collapse:collapse; font-family:'DM Mono',monospace; font-size:0.72rem; }
   .session-table th { color:#484f58; font-weight:500; padding:5px 8px; text-align:left; border-bottom:1px solid #21262d; }
   .session-table td { color:#c9d1d9; padding:5px 8px; border-bottom:1px solid #161b22; }
-  .session-table td.muted { color:#484f58; }
   .session-lock-btn { padding:5px 10px; border-radius:6px; border:1px solid rgba(255,107,107,0.3); background:rgba(255,107,107,0.08); color:#ff6b6b; font-family:'Sora',sans-serif; font-size:0.72rem; cursor:pointer; white-space:nowrap; transition:background 0.2s; }
   .session-lock-btn:hover { background:rgba(255,107,107,0.2); }
-
-  /* ── RESULT / RULES HINT ── */
   .result-box { border-radius:10px; padding:10px 14px; font-size:0.78rem; font-family:'DM Mono',monospace; display:none; line-height:1.6; white-space:pre-wrap; }
   .result-box.show { display:block; }
   .result-box.ok { background:rgba(63,185,80,0.08); border:1px solid rgba(63,185,80,0.25); color:#3fb950; }
@@ -143,7 +128,6 @@
   .rules-hint { font-size:0.72rem; font-family:'DM Mono',monospace; color:#e3b341; background:rgba(227,179,65,0.07); border:1px solid rgba(227,179,65,0.2); border-radius:8px; padding:9px 12px; display:none; line-height:1.6; }
   .rules-hint.show { display:block; }
   .rules-hint code { background:rgba(227,179,65,0.12); padding:1px 5px; border-radius:4px; }
-
   footer { text-align:center; padding:14px 24px; font-size:0.68rem; color:#484f58; font-family:'DM Mono',monospace; border-top:1px solid #30363d; }
 
   /* ── GATE ── */
@@ -170,6 +154,112 @@
   .gate-attempts b { color:#e3b341; }
   #lockout-msg { display:none; text-align:center; padding:8px 0; font-size:0.78rem; font-family:'DM Mono',monospace; color:#e3b341; }
   #lockout-msg.show { display:block; }
+
+  /* ── SCREENS ── */
+  .screen { display:none; }
+  .screen.active { display:flex; flex-direction:column; }
+
+  /* ── SAVED CONFIG PAGE ── */
+  #screen-config { gap:0; }
+  .config-body { padding:24px; display:flex; flex-direction:column; gap:18px; }
+  .saved-badge { display:flex; align-items:center; gap:10px; background:rgba(63,185,80,0.08); border:1px solid rgba(63,185,80,0.25); border-radius:10px; padding:10px 14px; }
+  .saved-badge .sb-dot { width:8px; height:8px; border-radius:50%; background:#3fb950; flex-shrink:0; }
+  .saved-badge .sb-info { flex:1; }
+  .saved-badge .sb-proj { font-family:'DM Mono',monospace; font-size:0.82rem; color:#3fb950; }
+  .saved-badge .sb-url  { font-family:'DM Mono',monospace; font-size:0.68rem; color:#7d8590; margin-top:2px; }
+  .saved-badge .sb-clear { background:none; border:1px solid #30363d; color:#7d8590; padding:4px 10px; border-radius:6px; font-size:0.72rem; cursor:pointer; font-family:'Sora',sans-serif; transition:border-color 0.2s,color 0.2s; white-space:nowrap; }
+  .saved-badge .sb-clear:hover { border-color:#ff6b6b; color:#ff6b6b; }
+  .channel-select-row { display:flex; gap:8px; align-items:center; }
+  .channel-select-row input { flex:1; background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:9px 12px; color:#e6edf3; font-family:'DM Mono',monospace; font-size:0.78rem; outline:none; transition:border-color 0.2s; }
+  .channel-select-row input:focus { border-color:#58a6ff; }
+  .channel-select-row .scan-btn { background:#21262d; border:1px solid #30363d; color:#7d8590; padding:9px 14px; border-radius:8px; cursor:pointer; font-family:'Sora',sans-serif; font-size:0.78rem; transition:border-color 0.2s,color 0.2s; white-space:nowrap; }
+  .channel-select-row .scan-btn:hover { border-color:#58a6ff; color:#58a6ff; }
+
+  /* ── CHANNELS BROWSER ── */
+  .channels-zone { border:1px solid rgba(88,166,255,0.25); border-radius:12px; overflow:hidden; }
+  .channels-header-bar { background:rgba(88,166,255,0.06); border-bottom:1px solid rgba(88,166,255,0.15); padding:10px 14px; display:flex; align-items:center; justify-content:space-between; }
+  .channels-header-bar span { font-size:0.72rem; font-family:'DM Mono',monospace; color:#58a6ff; letter-spacing:0.08em; }
+  .channels-header-bar .ch-actions { display:flex; gap:8px; align-items:center; }
+  .nuke-all-btn { padding:5px 12px; border-radius:6px; border:1px solid rgba(255,107,107,0.3); background:rgba(255,107,107,0.08); color:#ff6b6b; font-family:'Sora',sans-serif; font-size:0.72rem; cursor:pointer; transition:background 0.2s; white-space:nowrap; }
+  .nuke-all-btn:hover { background:rgba(255,107,107,0.2); }
+  .nuke-all-btn:disabled { opacity:0.35; cursor:not-allowed; }
+  .refresh-btn { padding:5px 10px; border-radius:6px; border:1px solid #30363d; background:#21262d; color:#7d8590; font-family:'Sora',sans-serif; font-size:0.72rem; cursor:pointer; transition:border-color 0.2s,color 0.2s; }
+  .refresh-btn:hover { border-color:#58a6ff; color:#58a6ff; }
+  .channels-list { padding:10px; display:flex; flex-direction:column; gap:6px; max-height:260px; overflow-y:auto; }
+  .channel-item { display:flex; align-items:center; gap:10px; background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:9px 12px; transition:border-color 0.2s; }
+  .channel-item:hover { border-color:#30363d88; }
+  .channel-item.active-ch { border-color:#58a6ff44; }
+  .ch-item-name { font-family:'DM Mono',monospace; font-size:0.8rem; color:#e6edf3; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .ch-item-meta { font-family:'DM Mono',monospace; font-size:0.68rem; color:#7d8590; white-space:nowrap; }
+  .ch-item-actions { display:flex; gap:5px; flex-shrink:0; }
+  .ch-use-btn { padding:3px 8px; border-radius:5px; border:1px solid rgba(88,166,255,0.3); background:rgba(88,166,255,0.08); color:#58a6ff; font-family:'Sora',sans-serif; font-size:0.68rem; cursor:pointer; transition:background 0.2s; }
+  .ch-use-btn:hover { background:rgba(88,166,255,0.2); }
+  .ch-del-btn { padding:3px 8px; border-radius:5px; border:1px solid rgba(255,107,107,0.2); background:rgba(255,107,107,0.05); color:#ff6b6b; font-family:'Sora',sans-serif; font-size:0.68rem; cursor:pointer; transition:background 0.2s; }
+  .ch-del-btn:hover { background:rgba(255,107,107,0.15); }
+  .channels-empty { padding:20px; text-align:center; font-family:'DM Mono',monospace; font-size:0.75rem; color:#484f58; }
+  .channels-loading { padding:16px; text-align:center; font-family:'DM Mono',monospace; font-size:0.75rem; color:#7d8590; }
+
+  /* ── SEARCH ZONE ── */
+  .search-zone { border:1px solid rgba(163,113,247,0.25); border-radius:12px; overflow:hidden; }
+  .search-header { background:rgba(163,113,247,0.06); border-bottom:1px solid rgba(163,113,247,0.15); padding:10px 14px; font-size:0.72rem; font-family:'DM Mono',monospace; color:#a371f7; letter-spacing:0.08em; }
+  .search-body { padding:14px; display:flex; flex-direction:column; gap:10px; }
+  .search-row { display:flex; gap:8px; }
+  .search-row input { flex:1; background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:9px 12px; color:#e6edf3; font-family:'DM Mono',monospace; font-size:0.78rem; outline:none; transition:border-color 0.2s; }
+  .search-row input:focus { border-color:#a371f7; }
+  .search-row input::placeholder { color:#484f58; }
+  .search-go-btn { padding:9px 14px; border-radius:8px; border:1px solid rgba(163,113,247,0.3); background:rgba(163,113,247,0.08); color:#a371f7; font-family:'Sora',sans-serif; font-weight:600; font-size:0.78rem; cursor:pointer; white-space:nowrap; transition:background 0.2s; }
+  .search-go-btn:hover { background:rgba(163,113,247,0.18); }
+  .search-results { background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:10px 12px; max-height:200px; overflow-y:auto; display:none; flex-direction:column; gap:6px; }
+  .search-results.show { display:flex; }
+  .search-hit { background:#161b22; border:1px solid #21262d; border-radius:6px; padding:8px 10px; }
+  .search-hit .sh-meta { font-family:'DM Mono',monospace; font-size:0.65rem; color:#484f58; margin-bottom:3px; }
+  .search-hit .sh-text { font-size:0.78rem; color:#c9d1d9; line-height:1.5; }
+  .search-hit .sh-text mark { background:rgba(163,113,247,0.2); color:#a371f7; border-radius:2px; padding:0 2px; }
+  .search-empty { font-family:'DM Mono',monospace; font-size:0.75rem; color:#484f58; text-align:center; padding:10px 0; }
+
+  /* ── STATS / ANALYTICS ZONE ── */
+  .analytics-zone { border:1px solid rgba(63,185,80,0.25); border-radius:12px; overflow:hidden; }
+  .analytics-header { background:rgba(63,185,80,0.06); border-bottom:1px solid rgba(63,185,80,0.15); padding:10px 14px; font-size:0.72rem; font-family:'DM Mono',monospace; color:#3fb950; letter-spacing:0.08em; }
+  .analytics-body { padding:14px; display:flex; flex-direction:column; gap:10px; }
+  .analytics-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .analytics-item { background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:10px 12px; }
+  .analytics-item .ai-label { font-family:'DM Mono',monospace; font-size:0.65rem; color:#484f58; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px; }
+  .analytics-item .ai-val { font-family:'DM Mono',monospace; font-size:0.9rem; color:#e6edf3; font-weight:500; }
+  .activity-bar { display:flex; gap:2px; align-items:flex-end; height:40px; }
+  .ab-col { flex:1; background:#21262d; border-radius:2px; min-height:3px; transition:background 0.2s; cursor:default; position:relative; }
+  .ab-col:hover { background:#58a6ff44; }
+  .ab-col .ab-tip { position:absolute; bottom:calc(100% + 4px); left:50%; transform:translateX(-50%); background:#21262d; border:1px solid #30363d; border-radius:4px; padding:2px 6px; font-family:'DM Mono',monospace; font-size:0.62rem; color:#c9d1d9; white-space:nowrap; display:none; z-index:10; pointer-events:none; }
+  .ab-col:hover .ab-tip { display:block; }
+
+  /* ── PINNED MESSAGES ZONE ── */
+  .pin-zone { border:1px solid rgba(227,179,65,0.25); border-radius:12px; overflow:hidden; }
+  .pin-header { background:rgba(227,179,65,0.06); border-bottom:1px solid rgba(227,179,65,0.15); padding:10px 14px; font-size:0.72rem; font-family:'DM Mono',monospace; color:#e3b341; letter-spacing:0.08em; }
+  .pin-body { padding:14px; display:flex; flex-direction:column; gap:10px; }
+  .pin-body p { font-size:0.78rem; color:#7d8590; line-height:1.6; }
+  .pin-input-row { display:flex; gap:8px; }
+  .pin-input-row textarea { flex:1; background:#0d1117; border:1px solid rgba(227,179,65,0.3); border-radius:8px; padding:9px 12px; color:#e3b341; font-family:'DM Mono',monospace; font-size:0.78rem; outline:none; resize:none; min-height:60px; transition:border-color 0.2s; }
+  .pin-input-row textarea:focus { border-color:#e3b341; }
+  .pin-input-row textarea::placeholder { color:rgba(227,179,65,0.3); }
+  .pin-save-btn { padding:9px 14px; border-radius:8px; border:1px solid rgba(227,179,65,0.3); background:rgba(227,179,65,0.08); color:#e3b341; font-family:'Sora',sans-serif; font-weight:700; font-size:0.78rem; cursor:pointer; white-space:nowrap; align-self:flex-start; transition:background 0.2s; }
+  .pin-save-btn:hover { background:rgba(227,179,65,0.18); }
+  .pinned-display { background:#0d1117; border:1px solid rgba(227,179,65,0.2); border-radius:8px; padding:10px 12px; font-family:'DM Mono',monospace; font-size:0.78rem; color:#e3b341; line-height:1.6; display:none; position:relative; }
+  .pinned-display.show { display:block; }
+  .pin-clear-btn { position:absolute; top:8px; right:8px; background:none; border:none; cursor:pointer; font-size:0.75rem; color:#484f58; transition:color 0.2s; padding:2px 5px; }
+  .pin-clear-btn:hover { color:#ff6b6b; }
+
+  /* ── AUTO-CLEAR SCHEDULE ZONE ── */
+  .schedule-zone { border:1px solid rgba(88,166,255,0.25); border-radius:12px; overflow:hidden; }
+  .schedule-header { background:rgba(88,166,255,0.06); border-bottom:1px solid rgba(88,166,255,0.15); padding:10px 14px; font-size:0.72rem; font-family:'DM Mono',monospace; color:#58a6ff; letter-spacing:0.08em; }
+  .schedule-body { padding:14px; display:flex; flex-direction:column; gap:10px; }
+  .schedule-body p { font-size:0.78rem; color:#7d8590; line-height:1.6; }
+  .schedule-opts { display:flex; gap:6px; flex-wrap:wrap; }
+  .sched-opt { padding:6px 12px; border-radius:8px; border:1px solid #30363d; background:#0d1117; color:#7d8590; font-family:'Sora',sans-serif; font-size:0.75rem; cursor:pointer; transition:border-color 0.2s,color 0.2s,background 0.2s; }
+  .sched-opt:hover { border-color:#58a6ff44; color:#c9d1d9; }
+  .sched-opt.selected { border-color:#58a6ff; background:rgba(88,166,255,0.1); color:#58a6ff; }
+  .sched-save-btn { padding:9px; border-radius:8px; border:1px solid rgba(88,166,255,0.3); background:rgba(88,166,255,0.08); color:#58a6ff; font-family:'Sora',sans-serif; font-weight:700; font-size:0.82rem; cursor:pointer; transition:background 0.2s; }
+  .sched-save-btn:hover { background:rgba(88,166,255,0.18); }
+  .sched-status { font-family:'DM Mono',monospace; font-size:0.72rem; color:#7d8590; background:#0d1117; border:1px solid #30363d; border-radius:6px; padding:6px 10px; display:none; }
+  .sched-status.show { display:block; }
 </style>
 </head>
 <body>
@@ -198,59 +288,124 @@
   </div>
 </div>
 
+<!-- MAIN CARD -->
 <div class="card">
   <div class="card-header">
     <div class="badge">🏠</div>
     <div>
       <h1>HomeLink Admin</h1>
-      <p>channel management &amp; data tools</p>
+      <p id="main-subtitle">channel management &amp; data tools</p>
     </div>
     <div class="owner-tag">⚙ owner only</div>
   </div>
 
-  <div class="card-body">
+  <!-- ── SCREEN 1: FIREBASE CONFIG ── -->
+  <div id="screen-config" class="screen active">
+    <div class="config-body">
 
-    <!-- Config -->
-    <div class="field">
-      <label>PASTE firebaseConfig (JS or JSON)</label>
-      <textarea id="config-paste" placeholder='const firebaseConfig = {
+      <!-- Saved config badge (shown when saved) -->
+      <div id="saved-badge" class="saved-badge" style="display:none">
+        <div class="sb-dot"></div>
+        <div class="sb-info">
+          <div class="sb-proj" id="sb-proj-text">—</div>
+          <div class="sb-url"  id="sb-url-text">—</div>
+        </div>
+        <button class="sb-clear" onclick="clearSavedConfig()">Clear saved</button>
+      </div>
+
+      <div id="config-fields">
+        <div class="field" style="margin-bottom:14px">
+          <label>PASTE firebaseConfig (JS or JSON)</label>
+          <textarea id="config-paste" placeholder='const firebaseConfig = {
   apiKey: "AIza...",
   databaseURL: "https://myapp-default-rtdb.firebaseio.com",
   projectId: "myapp"
 };'></textarea>
-    </div>
-    <button class="parse-btn" onclick="parseConfig()">↓ Parse config</button>
-    <div class="divider">or fill manually</div>
-    <div class="row">
-      <div class="field"><label>DATABASE URL</label><input id="f-dburl" type="text" placeholder="https://…firebaseio.com"></div>
-    </div>
-    <div class="row">
-      <div class="field"><label>API KEY</label><input id="f-apikey" type="text" placeholder="AIzaSy…"></div>
-      <div class="field"><label>PROJECT ID</label><input id="f-projid" type="text" placeholder="my-app"></div>
-    </div>
-    <div class="field">
-      <label>CHANNEL TO MANAGE</label>
-      <div class="channel-row">
-        <input id="f-channel" type="text" value="homelink-default" placeholder="homelink-default">
+        </div>
+        <button class="parse-btn" onclick="parseConfig()" style="margin-bottom:14px">↓ Parse config</button>
+        <div class="divider" style="margin-bottom:14px">or fill manually</div>
+        <div class="row" style="margin-bottom:10px">
+          <div class="field"><label>DATABASE URL</label><input id="f-dburl" type="text" placeholder="https://…firebaseio.com"></div>
+        </div>
+        <div class="row" style="margin-bottom:10px">
+          <div class="field"><label>API KEY</label><input id="f-apikey" type="text" placeholder="AIzaSy…"></div>
+          <div class="field"><label>PROJECT ID</label><input id="f-projid" type="text" placeholder="my-app"></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+          <input type="checkbox" id="save-config-chk" checked style="accent-color:#58a6ff;cursor:pointer">
+          <label for="save-config-chk" style="color:#7d8590;font-size:0.72rem;font-family:'DM Mono',monospace;cursor:pointer">Save Firebase config in browser (skip setup next time)</label>
+        </div>
       </div>
+
+      <div class="rules-hint" id="rules-hint-config">
+        ⚠ Permission denied. Your Firebase rules require auth.<br><br>
+        Temporarily set rules to:<br>
+        <code>{ "rules": { ".read": true, ".write": true } }</code><br><br>
+        Remember to re-lock rules after you're done.
+      </div>
+
+      <div class="status-line" id="conn-status-config">
+        <div class="status-dot warn" id="conn-dot-config"></div>
+        <span id="conn-text-config">—</span>
+      </div>
+
+      <button class="connect-btn primary" id="conn-btn-config" onclick="connectFirebase()">Connect to Firebase →</button>
     </div>
+  </div>
 
-    <div class="rules-hint" id="rules-hint">
-      ⚠ Permission denied. Your Firebase rules require auth.<br><br>
-      Temporarily set rules to:<br>
-      <code>{ "rules": { ".read": true, ".write": true } }</code><br><br>
-      Remember to re-lock rules after you're done.
+  <!-- ── SCREEN 2: CHANNEL SELECT ── -->
+  <div id="screen-channel" class="screen">
+    <div class="config-body">
+
+      <div class="saved-badge">
+        <div class="sb-dot"></div>
+        <div class="sb-info">
+          <div class="sb-proj" id="ch-screen-proj">—</div>
+          <div class="sb-url"  id="ch-screen-url">—</div>
+        </div>
+        <button class="sb-clear" onclick="goToConfig()">← Config</button>
+      </div>
+
+      <div class="field">
+        <label>CHANNEL TO MANAGE</label>
+        <div class="channel-select-row">
+          <input id="f-channel" type="text" value="homelink-default" placeholder="homelink-default">
+          <button class="scan-btn" onclick="scanChannels()">🔍 Scan all</button>
+        </div>
+      </div>
+
+      <!-- Channels browser -->
+      <div class="channels-zone" id="channels-zone" style="display:none">
+        <div class="channels-header-bar">
+          <span>📡 ACTIVE CHANNELS</span>
+          <div class="ch-actions">
+            <button class="refresh-btn" onclick="scanChannels()">↻ Refresh</button>
+            <button class="nuke-all-btn" id="nuke-all-btn" onclick="confirmClearAllChannels()" disabled>🗑 Clear ALL</button>
+          </div>
+        </div>
+        <div class="channels-list" id="channels-list">
+          <div class="channels-loading">Scanning database…</div>
+        </div>
+        <div style="padding:8px 10px;border-top:1px solid #21262d">
+          <div class="result-box" id="channels-result"></div>
+        </div>
+      </div>
+
+      <div class="rules-hint" id="rules-hint-ch">
+        ⚠ Permission denied — enable test mode rules in Firebase console.
+      </div>
+      <div class="status-line" id="conn-status-ch">
+        <div class="status-dot warn" id="conn-dot-ch"></div>
+        <span id="conn-text-ch">—</span>
+      </div>
+
+      <button class="connect-btn primary" id="load-channel-btn" onclick="loadChannel()">Inspect channel →</button>
     </div>
+  </div>
 
-    <div class="status-line" id="conn-status">
-      <div class="status-dot warn" id="conn-dot"></div>
-      <span id="conn-text">—</span>
-    </div>
-
-    <button class="connect-btn" id="conn-btn" onclick="connectAndLoad()">Connect &amp; inspect channel →</button>
-
-    <!-- ── PREVIEW PANEL ── -->
-    <div id="preview-panel">
+  <!-- ── SCREEN 3: CHANNEL ADMIN ── -->
+  <div id="screen-admin" class="screen">
+    <div class="card-body">
 
       <div class="channel-badge">
         <span class="ch-name" id="ch-display">—</span>
@@ -264,10 +419,10 @@
         <div class="stat-card"><div class="stat-val" id="stat-size">—</div><div class="stat-lbl">size</div></div>
       </div>
 
-      <!-- Tabs -->
       <div class="tabs">
         <button class="tab-btn active" onclick="switchTab('clear')">🗑 Clear</button>
-        <button class="tab-btn" onclick="switchTab('broadcast')">📢 Broadcast</button>
+        <button class="tab-btn" onclick="switchTab('broadcast')">📢 Send</button>
+        <button class="tab-btn" onclick="switchTab('search')">🔍 Search</button>
         <button class="tab-btn" onclick="switchTab('export')">📥 Export</button>
         <button class="tab-btn" onclick="switchTab('tools')">🔧 Tools</button>
       </div>
@@ -286,6 +441,10 @@
               <label class="scope-opt">
                 <input type="radio" name="scope" value="alerts">
                 <div><div class="opt-label">Alerts only</div><div class="opt-desc">Clears alert history only.</div></div>
+              </label>
+              <label class="scope-opt">
+                <input type="radio" name="scope" value="pinned">
+                <div><div class="opt-label">Pinned message</div><div class="opt-desc">Removes the pinned notice only.</div></div>
               </label>
               <label class="scope-opt">
                 <input type="radio" name="scope" value="channel">
@@ -307,7 +466,6 @@
         <div class="broadcast-zone">
           <div class="broadcast-header">📢 BROADCAST — Send a message to the channel</div>
           <div class="broadcast-body">
-            <p style="font-size:0.78rem;color:#7d8590;line-height:1.6;">Post a message as either side. Useful for announcements or testing.</p>
             <div>
               <div class="section-label" style="margin-bottom:8px">SEND AS</div>
               <div class="sender-select">
@@ -328,14 +486,40 @@
         </div>
       </div>
 
+      <!-- TAB: SEARCH -->
+      <div class="tab-pane" id="tab-search">
+        <div class="search-zone">
+          <div class="search-header">🔍 SEARCH — Find messages in channel</div>
+          <div class="search-body">
+            <div class="search-row">
+              <input type="text" id="search-input" placeholder="Search text…" onkeydown="if(event.key==='Enter')searchMessages()">
+              <button class="search-go-btn" onclick="searchMessages()">Search</button>
+            </div>
+            <div class="search-row" style="gap:6px;flex-wrap:wrap">
+              <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:0.75rem;color:#7d8590">
+                <input type="checkbox" id="search-school" checked style="accent-color:#58a6ff"> Desktop
+              </label>
+              <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:0.75rem;color:#7d8590">
+                <input type="checkbox" id="search-phone" checked style="accent-color:#58a6ff"> Home
+              </label>
+              <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:0.75rem;color:#7d8590">
+                <input type="checkbox" id="search-media" style="accent-color:#58a6ff"> Include media msgs
+              </label>
+            </div>
+            <div class="search-results" id="search-results"></div>
+            <div class="result-box" id="search-result"></div>
+          </div>
+        </div>
+      </div>
+
       <!-- TAB: EXPORT -->
       <div class="tab-pane" id="tab-export">
         <div class="export-zone">
           <div class="export-header">📥 EXPORT — Download channel data</div>
           <div class="export-body">
-            <p style="font-size:0.78rem;color:#7d8590;line-height:1.6;">Download messages as a JSON file or plain text transcript.</p>
             <button class="export-btn" onclick="exportJSON()">⬇ Export as JSON</button>
             <button class="export-btn" onclick="exportTranscript()">⬇ Export as transcript (.txt)</button>
+            <button class="export-btn" onclick="exportCSV()">⬇ Export as CSV</button>
             <div class="section-label">PREVIEW (last 5 messages)</div>
             <div class="export-preview" id="export-preview"></div>
             <div class="result-box" id="export-result"></div>
@@ -346,7 +530,57 @@
       <!-- TAB: TOOLS -->
       <div class="tab-pane" id="tab-tools">
 
-        <!-- Rename channel -->
+        <!-- Analytics -->
+        <div class="analytics-zone">
+          <div class="analytics-header">📊 ANALYTICS — Channel activity</div>
+          <div class="analytics-body">
+            <div class="analytics-grid">
+              <div class="analytics-item"><div class="ai-label">Avg msgs/day</div><div class="ai-val" id="an-avg">—</div></div>
+              <div class="analytics-item"><div class="ai-label">Desktop msgs</div><div class="ai-val" id="an-school">—</div></div>
+              <div class="analytics-item"><div class="ai-label">Home msgs</div><div class="ai-val" id="an-phone">—</div></div>
+              <div class="analytics-item"><div class="ai-label">First message</div><div class="ai-val" id="an-first" style="font-size:0.72rem">—</div></div>
+            </div>
+            <div class="section-label">HOURLY ACTIVITY (last 7 days)</div>
+            <div class="activity-bar" id="activity-bar"></div>
+          </div>
+        </div>
+
+        <!-- Pinned message -->
+        <div class="pin-zone">
+          <div class="pin-header">📌 PINNED NOTICE — Shown to all users</div>
+          <div class="pin-body">
+            <p>Set a pinned message that HomeLink clients can read and display to users.</p>
+            <div class="pinned-display" id="pinned-display">
+              <button class="pin-clear-btn" onclick="clearPinned()" title="Remove pinned">✕</button>
+              <span id="pinned-text">—</span>
+            </div>
+            <div class="pin-input-row">
+              <textarea id="pin-input" placeholder="Type notice text… (leave blank to clear)"></textarea>
+              <button class="pin-save-btn" onclick="savePinned()">📌 Set pin</button>
+            </div>
+            <div class="result-box" id="pin-result"></div>
+          </div>
+        </div>
+
+        <!-- Auto-clear schedule -->
+        <div class="schedule-zone">
+          <div class="schedule-header">⏰ AUTO-CLEAR SCHEDULE</div>
+          <div class="schedule-body">
+            <p>Set how often messages are automatically cleared from this channel. Applied server-side via the <code style="font-family:'DM Mono',monospace;font-size:0.75rem;background:#21262d;padding:1px 5px;border-radius:3px">lastCleared</code> timestamp.</p>
+            <div class="schedule-opts" id="sched-opts">
+              <button class="sched-opt selected" data-val="86400000"  onclick="selectSched(this)">24h</button>
+              <button class="sched-opt" data-val="172800000" onclick="selectSched(this)">48h</button>
+              <button class="sched-opt" data-val="604800000" onclick="selectSched(this)">7 days</button>
+              <button class="sched-opt" data-val="2592000000" onclick="selectSched(this)">30 days</button>
+              <button class="sched-opt" data-val="0"          onclick="selectSched(this)">Never</button>
+            </div>
+            <button class="sched-save-btn" onclick="saveSchedule()">Save schedule</button>
+            <div class="sched-status" id="sched-status"></div>
+            <div class="result-box" id="sched-result"></div>
+          </div>
+        </div>
+
+        <!-- Copy channel -->
         <div class="rename-zone">
           <div class="rename-header">✏️ COPY TO NEW CHANNEL (migration)</div>
           <div class="rename-body">
@@ -359,15 +593,14 @@
           </div>
         </div>
 
-        <!-- Session / lockout info -->
+        <!-- Session -->
         <div class="session-zone">
           <div class="session-header">🔒 SECURITY — Active session &amp; lockout</div>
           <div class="session-body">
-            <p>Admin session info and quick security actions.</p>
             <table class="session-table">
               <tr><th>Session started</th><td id="sess-started">—</td></tr>
               <tr><th>Channel</th><td id="sess-channel">—</td></tr>
-              <tr><th>Failed login attempts (this session)</th><td id="sess-attempts">—</td></tr>
+              <tr><th>Failed logins (session)</th><td id="sess-attempts">—</td></tr>
               <tr><th>Auto-logout in</th><td id="sess-timeout">—</td></tr>
             </table>
             <button class="session-lock-btn" onclick="forceLogout()">🔒 Lock admin now</button>
@@ -375,12 +608,15 @@
           </div>
         </div>
 
+        <!-- Switch channel / back -->
+        <button class="connect-btn" onclick="goToChannelSelect()">← Switch channel</button>
+
       </div>
 
-    </div><!-- /preview-panel -->
-
+    </div>
   </div>
-  <footer>homelink-admin · keep this file private · not linked from the main app</footer>
+
+  <footer id="main-footer">homelink-admin · keep this file private · not linked from the main app</footer>
 </div>
 
 <!-- PASSWORD GATE LOGIC -->
@@ -388,22 +624,20 @@
   const ADMIN_SALT = '8c28f13b3f3276785be04cc3383f41ed67f685d4480bfd207d85addd59592134';
   const ADMIN_HASH = '02c75589a03db3ba9aa3093183be77d93d3752d7e624dee4c6bec324f4912be7';
   const MAX_ATTEMPTS = 5;
-  const LOCKOUT_MS   = 10 * 60 * 1000; // 10 min
-  const SESSION_MS   = 30 * 60 * 1000; // 30 min auto-logout
+  const LOCKOUT_MS   = 10 * 60 * 1000;
+  const SESSION_MS   = 30 * 60 * 1000;
+  const CONFIG_KEY   = 'hl-admin-firebase-cfg';
 
   let sessionStart = null;
   let sessionTimer = null;
 
-  function getLockoutState() {
-    try { return JSON.parse(sessionStorage.getItem('hl-admin-lockout') || '{}'); }
-    catch { return {}; }
-  }
-  function saveLockoutState(s) { sessionStorage.setItem('hl-admin-lockout', JSON.stringify(s)); }
+  function getLockoutState() { try { return JSON.parse(sessionStorage.getItem('hl-admin-lockout')||'{}'); } catch { return {}; } }
+  function saveLockoutState(s) { sessionStorage.setItem('hl-admin-lockout',JSON.stringify(s)); }
 
   async function pbkdf2Hash(password, saltHex) {
     const enc = new TextEncoder();
     const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']);
-    const saltBytes = new Uint8Array(saltHex.match(/.{2}/g).map(b => parseInt(b, 16)));
+    const saltBytes = new Uint8Array(saltHex.match(/.{2}/g).map(b => parseInt(b,16)));
     const bits = await crypto.subtle.deriveBits(
       { name:'PBKDF2', salt:saltBytes, iterations:310000, hash:'SHA-256' }, keyMaterial, 256
     );
@@ -416,17 +650,10 @@
     btn.disabled=true; inp.disabled=true; attEl.style.display='none';
     const tick = () => {
       const left = Math.max(0, until - Date.now());
-      if (left === 0) {
-        btn.disabled=false; inp.disabled=false; inp.value='';
-        msg.classList.remove('show');
-        const s=getLockoutState(); s.attempts=0; saveLockoutState(s);
-        document.getElementById('gate-err').classList.remove('show');
-        return;
-      }
+      if (left === 0) { btn.disabled=false; inp.disabled=false; inp.value=''; msg.classList.remove('show'); const s=getLockoutState(); s.attempts=0; saveLockoutState(s); document.getElementById('gate-err').classList.remove('show'); return; }
       const m=Math.floor(left/60000), s2=Math.floor((left%60000)/1000);
       msg.textContent=`Too many attempts. Try again in ${m}:${String(s2).padStart(2,'0')}`;
-      msg.classList.add('show');
-      setTimeout(tick, 500);
+      msg.classList.add('show'); setTimeout(tick,500);
     };
     tick();
   }
@@ -435,8 +662,7 @@
     sessionStart = Date.now();
     if (sessionTimer) clearInterval(sessionTimer);
     sessionTimer = setInterval(() => {
-      const elapsed = Date.now() - sessionStart;
-      const left = Math.max(0, SESSION_MS - elapsed);
+      const left = Math.max(0, SESSION_MS - (Date.now() - sessionStart));
       const m = Math.floor(left/60000), s = Math.floor((left%60000)/1000);
       const el = document.getElementById('sess-timeout');
       if (el) el.textContent = left === 0 ? 'Expired' : `${m}m ${s}s`;
@@ -475,17 +701,40 @@
       document.getElementById('gate').classList.add('unlocked');
       sessionStorage.removeItem('hl-admin-lockout');
       startSessionTimer();
+      checkSavedConfig();
     } else {
       s.attempts = (s.attempts||0)+1;
       const remaining = MAX_ATTEMPTS - s.attempts;
       input.classList.add('shake'); setTimeout(()=>input.classList.remove('shake'),400); input.value='';
-      if (remaining <= 0) {
-        s.lockedUntil = Date.now()+LOCKOUT_MS; saveLockoutState(s); startLockoutTimer(s.lockedUntil);
-      } else {
-        saveLockoutState(s); err.classList.add('show');
-        attEl.style.display='block'; attLeft.textContent=remaining; btn.disabled=false;
-      }
+      if (remaining <= 0) { s.lockedUntil = Date.now()+LOCKOUT_MS; saveLockoutState(s); startLockoutTimer(s.lockedUntil); }
+      else { saveLockoutState(s); err.classList.add('show'); attEl.style.display='block'; attLeft.textContent=remaining; btn.disabled=false; }
     }
+  };
+
+  function checkSavedConfig() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(CONFIG_KEY));
+      if (saved && saved.apiKey && saved.databaseURL && saved.projectId) {
+        // Show saved badge and skip to channel screen
+        document.getElementById('sb-proj-text').textContent = saved.projectId;
+        document.getElementById('sb-url-text').textContent = saved.databaseURL;
+        document.getElementById('saved-badge').style.display = 'flex';
+        document.getElementById('config-fields').style.display = 'none';
+        // Pre-fill fields anyway for if user clears
+        document.getElementById('f-dburl').value = saved.databaseURL;
+        document.getElementById('f-apikey').value = saved.apiKey;
+        document.getElementById('f-projid').value = saved.projectId;
+      }
+    } catch(e) {}
+  }
+
+  window.clearSavedConfig = () => {
+    localStorage.removeItem(CONFIG_KEY);
+    document.getElementById('saved-badge').style.display = 'none';
+    document.getElementById('config-fields').style.display = 'block';
+    document.getElementById('f-dburl').value = '';
+    document.getElementById('f-apikey').value = '';
+    document.getElementById('f-projid').value = '';
   };
 
   window.addEventListener('DOMContentLoaded',()=>{
@@ -494,39 +743,37 @@
     document.getElementById('gate-input').focus();
   });
 
-  // Disable right-click and devtools shortcuts as a light deterrent
   document.addEventListener('contextmenu', e => e.preventDefault());
   document.addEventListener('keydown', e => {
-    if (e.key==='F12' || (e.ctrlKey&&e.shiftKey&&['I','J','C'].includes(e.key)) || (e.ctrlKey&&e.key==='U')) {
-      e.preventDefault();
-    }
+    if (e.key==='F12' || (e.ctrlKey&&e.shiftKey&&['I','J','C'].includes(e.key)) || (e.ctrlKey&&e.key==='U')) e.preventDefault();
   });
+
+  // Screen management
+  window.showScreen = (id) => {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  };
+  window.goToConfig = () => showScreen('screen-config');
+  window.goToChannelSelect = () => showScreen('screen-channel');
 </script>
 
 <script type="module">
 import { initializeApp, deleteApp }
   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getDatabase, ref, get, remove, set, push }
+import { getDatabase, ref, get, remove, set, push, child }
   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
-let db=null, currentChannel=null, currentApp=null, cachedData=null;
+const CONFIG_KEY = 'hl-admin-firebase-cfg';
+let db=null, currentChannel=null, currentApp=null, cachedData=null, firebaseCfg=null;
 
-// ── ROBUST CONFIG PARSER ──
+// ── CONFIG PARSER ──
 function parseFirebaseConfig(raw) {
   const clean = raw.replace(/[\u0000-\u001F\u007F-\u009F\u200B-\u200D\uFEFF]/g,' ');
   function extract(key) {
     const m = clean.match(new RegExp(key+'\\s*:\\s*["\']([^"\']+)["\']'));
     return m ? m[1].trim() : null;
   }
-  const cfg = {
-    apiKey:            extract('apiKey'),
-    authDomain:        extract('authDomain'),
-    databaseURL:       extract('databaseURL'),
-    projectId:         extract('projectId'),
-    storageBucket:     extract('storageBucket'),
-    messagingSenderId: extract('messagingSenderId'),
-    appId:             extract('appId'),
-  };
+  const cfg = { apiKey:extract('apiKey'), authDomain:extract('authDomain'), databaseURL:extract('databaseURL'), projectId:extract('projectId'), storageBucket:extract('storageBucket'), messagingSenderId:extract('messagingSenderId'), appId:extract('appId') };
   if (!cfg.apiKey)      throw new Error('apiKey not found');
   if (!cfg.databaseURL) throw new Error('databaseURL not found — enable Realtime Database in Firebase');
   if (!cfg.projectId)   throw new Error('projectId not found');
@@ -540,62 +787,168 @@ window.parseConfig = () => {
     if (cfg.databaseURL) document.getElementById('f-dburl').value = cfg.databaseURL;
     if (cfg.apiKey)      document.getElementById('f-apikey').value = cfg.apiKey;
     if (cfg.projectId)   document.getElementById('f-projid').value = cfg.projectId;
-    setStatus('ok','Config parsed ✓'); hideRulesHint();
-  } catch(e) { setStatus('err','Parse failed: '+e.message); }
+    setStatusConfig('ok','Config parsed ✓');
+  } catch(e) { setStatusConfig('err','Parse failed: '+e.message); }
 };
 
 // ── UI HELPERS ──
-function setStatus(level,msg) {
-  const line=document.getElementById('conn-status'); line.classList.add('show');
-  document.getElementById('conn-dot').className='status-dot '+level;
-  document.getElementById('conn-text').textContent=msg;
+function setStatusConfig(level,msg) {
+  const line=document.getElementById('conn-status-config'); line.classList.add('show');
+  document.getElementById('conn-dot-config').className='status-dot '+level;
+  document.getElementById('conn-text-config').textContent=msg;
+}
+function setStatusCh(level,msg) {
+  const line=document.getElementById('conn-status-ch'); line.classList.add('show');
+  document.getElementById('conn-dot-ch').className='status-dot '+level;
+  document.getElementById('conn-text-ch').textContent=msg;
 }
 function showRes(id,type,msg) {
-  const b=document.getElementById(id); b.className='result-box show '+type; b.textContent=msg;
+  const b=document.getElementById(id); if(!b)return; b.className='result-box show '+type; b.textContent=msg;
 }
-function hideRulesHint() { document.getElementById('rules-hint').classList.remove('show'); }
-function showRulesHint() { document.getElementById('rules-hint').classList.add('show'); }
+function hideRes(id) { const b=document.getElementById(id); if(b) b.className='result-box'; }
 
-window.switchTab = (name) => {
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
-    const names=['clear','broadcast','export','tools'];
-    b.classList.toggle('active', names[i]===name);
-  });
-  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  if (name==='export') refreshExportPreview();
-  if (name==='tools') window.updateSessionTable?.();
-};
-
-// ── CONNECT ──
-window.connectAndLoad = async () => {
+// ── CONNECT FIREBASE ──
+window.connectFirebase = async () => {
   const dbURL=document.getElementById('f-dburl').value.trim();
   const apiKey=document.getElementById('f-apikey').value.trim();
   const projId=document.getElementById('f-projid').value.trim();
-  const channel=document.getElementById('f-channel').value.trim()||'homelink-default';
-  if (!dbURL||!apiKey||!projId) { setStatus('err','Fill in all three fields'); return; }
-
-  const btn=document.getElementById('conn-btn');
+  const shouldSave=document.getElementById('save-config-chk')?.checked ?? true;
+  if (!dbURL||!apiKey||!projId) { setStatusConfig('err','Fill in all three fields'); return; }
+  const btn=document.getElementById('conn-btn-config');
   btn.disabled=true; btn.textContent='Connecting…';
-  setStatus('warn','Connecting…');
-  document.getElementById('preview-panel').classList.remove('show');
-  hideRulesHint();
-
+  setStatusConfig('warn','Connecting…');
   try {
     if (currentApp) { try { await deleteApp(currentApp); } catch(_){} }
-    currentApp = initializeApp({ apiKey, authDomain:`${projId}.firebaseapp.com`, databaseURL:dbURL, projectId:projId, storageBucket:`${projId}.appspot.com` }, 'admin-'+Date.now());
+    firebaseCfg = { apiKey, authDomain:`${projId}.firebaseapp.com`, databaseURL:dbURL, projectId:projId, storageBucket:`${projId}.appspot.com` };
+    currentApp = initializeApp(firebaseCfg, 'admin-'+Date.now());
     db = getDatabase(currentApp);
-    currentChannel = channel;
+    // Quick test read
+    await get(ref(db, '.info/connected'));
+    if (shouldSave) {
+      localStorage.setItem(CONFIG_KEY, JSON.stringify({ apiKey, databaseURL:dbURL, projectId:projId }));
+    }
+    // Move to channel screen
+    document.getElementById('ch-screen-proj').textContent = projId;
+    document.getElementById('ch-screen-url').textContent = dbURL;
+    showScreen('screen-channel');
+    setStatusCh('ok','Firebase connected ✓');
+  } catch(e) {
+    const m=e.message||String(e);
+    setStatusConfig('err','Connection failed: '+m);
+    if (m.includes('permission')||m.includes('PERMISSION_DENIED')) document.getElementById('rules-hint-config').classList.add('show');
+  } finally { btn.disabled=false; btn.textContent='Connect to Firebase →'; }
+};
 
+// Auto-connect if saved config exists
+(async () => {
+  try {
+    const saved = JSON.parse(localStorage.getItem(CONFIG_KEY));
+    if (saved && saved.apiKey && saved.databaseURL && saved.projectId) {
+      firebaseCfg = { apiKey:saved.apiKey, authDomain:`${saved.projectId}.firebaseapp.com`, databaseURL:saved.databaseURL, projectId:saved.projectId, storageBucket:`${saved.projectId}.appspot.com` };
+      currentApp = initializeApp(firebaseCfg, 'admin-'+Date.now());
+      db = getDatabase(currentApp);
+      document.getElementById('ch-screen-proj').textContent = saved.projectId;
+      document.getElementById('ch-screen-url').textContent = saved.databaseURL;
+    }
+  } catch(e) {}
+})();
+
+// ── SCAN CHANNELS ──
+window.scanChannels = async () => {
+  if (!db) { setStatusCh('err','Connect to Firebase first'); return; }
+  const zone = document.getElementById('channels-zone');
+  const list  = document.getElementById('channels-list');
+  zone.style.display = 'block';
+  list.innerHTML = '<div class="channels-loading">Scanning database…</div>';
+  document.getElementById('nuke-all-btn').disabled = true;
+  hideRes('channels-result');
+  try {
+    const rootSnap = await get(ref(db, '/'));
+    if (!rootSnap.exists()) { list.innerHTML = '<div class="channels-empty">No channels found in database.</div>'; return; }
+    const data = rootSnap.val();
+    const channels = Object.keys(data).filter(k => k !== '.info');
+    if (!channels.length) { list.innerHTML = '<div class="channels-empty">No channels found.</div>'; return; }
+    list.innerHTML = '';
+    channels.forEach(ch => {
+      const chData = data[ch] || {};
+      const msgs = chData.messages ? Object.keys(chData.messages).length : 0;
+      const alerts = chData.alerts ? Object.keys(chData.alerts).length : 0;
+      const sizeKB = (JSON.stringify(chData).length / 1024).toFixed(1);
+      const lastCleared = chData.lastCleared ? new Date(chData.lastCleared).toLocaleDateString() : 'never';
+      const isCurrent = ch === document.getElementById('f-channel').value.trim();
+      const item = document.createElement('div');
+      item.className = 'channel-item' + (isCurrent ? ' active-ch' : '');
+      item.innerHTML = `
+        <div class="ch-item-name">${esc(ch)}</div>
+        <div class="ch-item-meta">${msgs} msgs · ${sizeKB} KB</div>
+        <div class="ch-item-actions">
+          <button class="ch-use-btn" onclick="useChannel('${esc(ch)}')">Use</button>
+          <button class="ch-del-btn" onclick="deleteChannel('${esc(ch)}',this)">Del</button>
+        </div>`;
+      list.appendChild(item);
+    });
+    document.getElementById('nuke-all-btn').disabled = false;
+    setStatusCh('ok', `Found ${channels.length} channel${channels.length!==1?'s':''}`);
+  } catch(e) {
+    const m=e.message||String(e);
+    list.innerHTML = '<div class="channels-empty">Error: '+esc(m)+'</div>';
+    setStatusCh('err','Scan failed: '+m);
+    if (m.includes('permission')||m.includes('PERMISSION_DENIED')) document.getElementById('rules-hint-ch').classList.add('show');
+  }
+};
+
+window.useChannel = (ch) => {
+  document.getElementById('f-channel').value = ch;
+  setStatusCh('ok', `Channel set to "${ch}"`);
+};
+
+window.deleteChannel = async (ch, btn) => {
+  if (!confirm(`Delete channel "${ch}"? This is irreversible.`)) return;
+  btn.disabled = true; btn.textContent = '…';
+  try {
+    await remove(ref(db, ch));
+    btn.closest('.channel-item').remove();
+    showRes('channels-result','ok',`✓ Deleted "${ch}"`);
+  } catch(e) {
+    showRes('channels-result','err','Delete failed: '+e.message);
+    btn.disabled = false; btn.textContent = 'Del';
+  }
+};
+
+window.confirmClearAllChannels = async () => {
+  const list = document.getElementById('channels-list');
+  const channels = [...list.querySelectorAll('.ch-item-name')].map(el => el.textContent.trim());
+  if (!channels.length) return;
+  const confirmText = prompt(`This will WIPE ALL ${channels.length} channels permanently.\n\nType "DELETE ALL" to confirm:`);
+  if (confirmText !== 'DELETE ALL') { showRes('channels-result','err','Cancelled — text did not match.'); return; }
+  const btn = document.getElementById('nuke-all-btn');
+  btn.disabled = true; btn.textContent = '⏳ Clearing…';
+  let ok=0, fail=0;
+  for (const ch of channels) {
+    try { await remove(ref(db,ch)); ok++; } catch(e) { fail++; }
+  }
+  await scanChannels();
+  showRes('channels-result', fail?'err':'ok', `✓ Cleared ${ok} channel${ok!==1?'s':''}${fail?` · ${fail} failed`:''}. Database is empty.`);
+  btn.textContent = '🗑 Clear ALL';
+};
+
+// ── LOAD CHANNEL ──
+window.loadChannel = async () => {
+  if (!db) { setStatusCh('err','Not connected to Firebase'); return; }
+  const channel = document.getElementById('f-channel').value.trim() || 'homelink-default';
+  const btn = document.getElementById('load-channel-btn');
+  btn.disabled=true; btn.textContent='Loading…';
+  setStatusCh('warn','Loading channel…');
+  try {
     const snap = await get(ref(db, channel));
     cachedData = snap.exists() ? snap.val() : {};
+    currentChannel = channel;
     const msgs = cachedData.messages ? Object.values(cachedData.messages) : [];
     const mediaCount = msgs.filter(m=>m.type==='image'||m.type==='pdf').length;
     const alertCount = cachedData.alerts ? Object.keys(cachedData.alerts).length : 0;
     const rawSize = JSON.stringify(cachedData).length;
     const sizeStr = rawSize<1024 ? rawSize+' B' : rawSize<1048576 ? (rawSize/1024).toFixed(1)+' KB' : (rawSize/1048576).toFixed(2)+' MB';
     const lastCleared = cachedData.lastCleared ? new Date(cachedData.lastCleared).toLocaleString() : 'never';
-
     document.getElementById('ch-display').textContent = channel;
     document.getElementById('ch-name-inline').textContent = channel;
     document.getElementById('ch-meta').textContent = `last cleared: ${lastCleared}`;
@@ -607,18 +960,61 @@ window.connectAndLoad = async () => {
     document.getElementById('confirm-input').value = '';
     document.getElementById('nuke-btn').disabled = true;
     document.querySelectorAll('.result-box').forEach(b=>b.classList.remove('show'));
-
-    document.getElementById('preview-panel').classList.add('show');
-    setStatus('ok',`Connected · "${channel}" loaded`);
+    // Pinned
+    if (cachedData.pinned) {
+      document.getElementById('pinned-text').textContent = cachedData.pinned;
+      document.getElementById('pinned-display').classList.add('show');
+    } else {
+      document.getElementById('pinned-display').classList.remove('show');
+    }
+    // Schedule
+    if (cachedData.clearInterval !== undefined) {
+      const v = cachedData.clearInterval;
+      document.querySelectorAll('.sched-opt').forEach(o => {
+        o.classList.toggle('selected', parseInt(o.dataset.val) === v);
+      });
+      updateSchedStatus(v);
+    }
+    // Analytics
+    buildAnalytics(msgs);
     refreshExportPreview();
-    window.updateSessionTable?.();
-
+    updateSessionTable();
+    showScreen('screen-admin');
+    setStatusCh('ok', `"${channel}" loaded`);
   } catch(e) {
     const m=e.message||String(e);
-    setStatus('err','Connection failed: '+m);
-    if (m.includes('permission')||m.includes('PERMISSION_DENIED')||m.includes('denied')) showRulesHint();
-    db=null; currentChannel=null; cachedData=null;
-  } finally { btn.disabled=false; btn.textContent='Connect & inspect channel →'; }
+    setStatusCh('err','Load failed: '+m);
+    if (m.includes('permission')||m.includes('PERMISSION_DENIED')) document.getElementById('rules-hint-ch').classList.add('show');
+  } finally { btn.disabled=false; btn.textContent='Inspect channel →'; }
+};
+
+// ── ANALYTICS ──
+function buildAnalytics(msgs) {
+  const schoolMsgs = msgs.filter(m=>m.from==='school').length;
+  const phoneMsgs  = msgs.filter(m=>m.from==='phone').length;
+  const first = msgs.length ? new Date(Math.min(...msgs.map(m=>m.ts))) : null;
+  const days  = first ? Math.max(1, Math.ceil((Date.now()-first.getTime())/(86400000))) : 1;
+  document.getElementById('an-avg').textContent    = msgs.length ? (msgs.length/days).toFixed(1) : '0';
+  document.getElementById('an-school').textContent = schoolMsgs;
+  document.getElementById('an-phone').textContent  = phoneMsgs;
+  document.getElementById('an-first').textContent  = first ? first.toLocaleDateString([], {month:'short',day:'numeric',year:'numeric'}) : '—';
+  // Hourly bar (24 buckets)
+  const hours = new Array(24).fill(0);
+  const cutoff = Date.now() - 7*86400000;
+  msgs.filter(m=>m.ts>=cutoff).forEach(m=>{ hours[new Date(m.ts).getHours()]++; });
+  const maxH = Math.max(...hours, 1);
+  const bar = document.getElementById('activity-bar');
+  bar.innerHTML = hours.map((v,h)=>`<div class="ab-col" style="height:${Math.max(3,Math.round((v/maxH)*40))}px"><div class="ab-tip">${h}:00 — ${v} msg${v!==1?'s':''}</div></div>`).join('');
+}
+
+// ── TABS ──
+const TAB_NAMES = ['clear','broadcast','search','export','tools'];
+window.switchTab = (name) => {
+  document.querySelectorAll('.tab-btn').forEach((b,i)=> b.classList.toggle('active', TAB_NAMES[i]===name));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if (name==='export') refreshExportPreview();
+  if (name==='tools')  updateSessionTable();
 };
 
 // ── CONFIRM ──
@@ -633,18 +1029,25 @@ window.executeClear = async () => {
   const scope=document.querySelector('input[name=scope]:checked').value;
   const btn=document.getElementById('nuke-btn');
   btn.disabled=true; btn.textContent='⏳ Clearing…';
-  document.getElementById('clear-result').className='result-box';
+  hideRes('clear-result');
   try {
     if (scope==='messages') {
       await remove(ref(db,`${currentChannel}/messages`));
       await set(ref(db,`${currentChannel}/lastCleared`),Date.now());
-      showRes('clear-result','ok',`✓ Messages cleared from "${currentChannel}"\nlastCleared updated.`);
+      showRes('clear-result','ok',`✓ Messages cleared.\nlastCleared updated.`);
       document.getElementById('stat-msgs').textContent='0';
       document.getElementById('stat-media').textContent='0';
+      cachedData.messages = null;
     } else if (scope==='alerts') {
       await remove(ref(db,`${currentChannel}/alerts`));
-      showRes('clear-result','ok',`✓ Alerts cleared from "${currentChannel}".`);
+      showRes('clear-result','ok',`✓ Alerts cleared.`);
       document.getElementById('stat-alerts').textContent='0';
+      cachedData.alerts = null;
+    } else if (scope==='pinned') {
+      await remove(ref(db,`${currentChannel}/pinned`));
+      document.getElementById('pinned-display').classList.remove('show');
+      cachedData.pinned = null;
+      showRes('clear-result','ok','✓ Pinned message removed.');
     } else {
       await remove(ref(db,currentChannel));
       showRes('clear-result','ok',`✓ Entire channel "${currentChannel}" wiped.`);
@@ -652,14 +1055,13 @@ window.executeClear = async () => {
       document.getElementById('stat-media').textContent='0';
       document.getElementById('stat-alerts').textContent='0';
       document.getElementById('stat-size').textContent='0 B';
+      cachedData = {};
     }
-    cachedData = {};
     document.getElementById('confirm-input').value='';
     btn.disabled=true;
   } catch(e) {
     const m=e.message||String(e);
     showRes('clear-result','err','Clear failed: '+m);
-    if (m.includes('permission')||m.includes('PERMISSION_DENIED')) showRulesHint();
     window.checkConfirm();
   }
   btn.textContent='🗑 Clear';
@@ -677,10 +1079,41 @@ window.sendBroadcast = async () => {
     await push(ref(db,`${currentChannel}/messages`), { from:sender, text, ts:Date.now(), type:'text' });
     document.getElementById('bcast-text').value='';
     showRes('bcast-result','ok',`✓ Broadcast sent as "${sender}".`);
-  } catch(e) {
-    showRes('bcast-result','err','Send failed: '+e.message);
-  }
+  } catch(e) { showRes('bcast-result','err','Send failed: '+e.message); }
   btn.disabled=false; btn.textContent='📢 Send broadcast';
+};
+
+// ── SEARCH ──
+window.searchMessages = () => {
+  if (!cachedData) { showRes('search-result','err','Load a channel first.'); return; }
+  const query = document.getElementById('search-input').value.trim().toLowerCase();
+  if (!query) { showRes('search-result','err','Enter a search term.'); return; }
+  const incSchool = document.getElementById('search-school').checked;
+  const incPhone  = document.getElementById('search-phone').checked;
+  const incMedia  = document.getElementById('search-media').checked;
+  const msgs = cachedData.messages ? Object.values(cachedData.messages).sort((a,b)=>a.ts-b.ts) : [];
+  const results = msgs.filter(m => {
+    if (m.from==='school' && !incSchool) return false;
+    if (m.from==='phone'  && !incPhone)  return false;
+    if (m.type!=='text' && !incMedia) return false;
+    const text = (m.text||m.filename||'').toLowerCase();
+    return text.includes(query);
+  });
+  const container = document.getElementById('search-results');
+  hideRes('search-result');
+  if (!results.length) {
+    container.innerHTML = '<div class="search-empty">No messages found.</div>';
+    container.classList.add('show');
+    return;
+  }
+  container.innerHTML = results.slice(0,50).map(m => {
+    const t = new Date(m.ts).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+    const who = m.from==='school'?'💻 Desktop':'📱 Home';
+    const content = m.type==='text' ? esc(m.text||'').replace(new RegExp(esc(query),'gi'), s=>`<mark>${s}</mark>`) : `[${m.type}: ${esc(m.filename||'file')}]`;
+    return `<div class="search-hit"><div class="sh-meta">${t} · ${who}</div><div class="sh-text">${content}</div></div>`;
+  }).join('');
+  container.classList.add('show');
+  showRes('search-result','info',`Found ${results.length} result${results.length!==1?'s':''}${results.length>50?' (showing first 50)':''}.`);
 };
 
 // ── EXPORT ──
@@ -705,7 +1138,7 @@ function refreshExportPreview() {
 
 window.exportJSON = () => {
   if (!cachedData) { showRes('export-result','err','Not connected.'); return; }
-  const blob=new Blob([JSON.stringify({channel:currentChannel, exportedAt:new Date().toISOString(), data:cachedData},null,2)],{type:'application/json'});
+  const blob=new Blob([JSON.stringify({channel:currentChannel,exportedAt:new Date().toISOString(),data:cachedData},null,2)],{type:'application/json'});
   dl(blob,`homelink-${currentChannel}-${Date.now()}.json`);
   showRes('export-result','ok','✓ JSON downloaded.');
 };
@@ -717,7 +1150,7 @@ window.exportTranscript = () => {
   msgs.forEach(m=>{
     const t=new Date(m.ts).toLocaleString();
     const who=m.from==='school'?'[Desktop]':'[Home]';
-    const content=m.type==='text'?m.text:`[${m.type}: ${m.filename||'file'} ${m.filesize?'('+fmtBytes(m.filesize)+')':''}]`;
+    const content=m.type==='text'?m.text:`[${m.type}: ${m.filename||'file'}${m.filesize?' ('+fmtBytes(m.filesize)+')':''}]`;
     lines.push(`${t} ${who}  ${content}`);
   });
   const blob=new Blob([lines.join('\n')],{type:'text/plain'});
@@ -725,9 +1158,79 @@ window.exportTranscript = () => {
   showRes('export-result','ok','✓ Transcript downloaded.');
 };
 
+window.exportCSV = () => {
+  if (!cachedData) { showRes('export-result','err','Not connected.'); return; }
+  const msgs=getMsgs();
+  const rows=[['timestamp','from','type','text','filename','filesize']];
+  msgs.forEach(m=>rows.push([
+    new Date(m.ts).toISOString(),
+    m.from||'',
+    m.type||'text',
+    (m.text||'').replace(/"/g,'""'),
+    m.filename||'',
+    m.filesize||''
+  ]));
+  const csv=rows.map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  dl(blob,`homelink-${currentChannel}-${Date.now()}.csv`);
+  showRes('export-result','ok','✓ CSV downloaded.');
+};
+
 function dl(blob,name) {
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 }
+
+// ── PINNED MESSAGE ──
+window.savePinned = async () => {
+  if (!db||!currentChannel) { showRes('pin-result','err','Not connected.'); return; }
+  const text = document.getElementById('pin-input').value.trim();
+  try {
+    if (text) {
+      await set(ref(db,`${currentChannel}/pinned`), text);
+      document.getElementById('pinned-text').textContent = text;
+      document.getElementById('pinned-display').classList.add('show');
+      document.getElementById('pin-input').value = '';
+      showRes('pin-result','ok','✓ Pinned message saved.');
+      cachedData.pinned = text;
+    } else {
+      await remove(ref(db,`${currentChannel}/pinned`));
+      document.getElementById('pinned-display').classList.remove('show');
+      showRes('pin-result','ok','✓ Pinned message cleared.');
+      cachedData.pinned = null;
+    }
+  } catch(e) { showRes('pin-result','err','Failed: '+e.message); }
+};
+
+window.clearPinned = () => {
+  document.getElementById('pin-input').value = '';
+  window.savePinned();
+};
+
+// ── AUTO-CLEAR SCHEDULE ──
+let selectedSchedVal = 86400000;
+
+window.selectSched = (btn) => {
+  document.querySelectorAll('.sched-opt').forEach(o=>o.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedSchedVal = parseInt(btn.dataset.val);
+};
+
+function updateSchedStatus(val) {
+  const el = document.getElementById('sched-status');
+  const labels = {0:'Auto-clear disabled',86400000:'Messages cleared every 24 hours',172800000:'Messages cleared every 48 hours',604800000:'Messages cleared every 7 days',2592000000:'Messages cleared every 30 days'};
+  el.textContent = labels[val] || `Auto-clear every ${val}ms`;
+  el.classList.add('show');
+}
+
+window.saveSchedule = async () => {
+  if (!db||!currentChannel) { showRes('sched-result','err','Not connected.'); return; }
+  try {
+    await set(ref(db,`${currentChannel}/clearInterval`), selectedSchedVal);
+    cachedData.clearInterval = selectedSchedVal;
+    updateSchedStatus(selectedSchedVal);
+    showRes('sched-result','ok','✓ Schedule saved.');
+  } catch(e) { showRes('sched-result','err','Failed: '+e.message); }
+};
 
 // ── COPY CHANNEL ──
 window.copyChannel = async () => {
@@ -739,14 +1242,30 @@ window.copyChannel = async () => {
   try {
     await set(ref(db,target), JSON.parse(JSON.stringify(cachedData)));
     showRes('copy-result','ok',`✓ Copied to "${target}". Old channel intact.`);
-  } catch(e) {
-    showRes('copy-result','err','Copy failed: '+e.message);
-  }
+  } catch(e) { showRes('copy-result','err','Copy failed: '+e.message); }
   btn.disabled=false; btn.textContent='Copy →';
 };
 
+// ── SESSION ──
+window.updateSessionTable = () => {
+  const s = getLockoutState();
+  const started=document.getElementById('sess-started');
+  const ch=document.getElementById('sess-channel');
+  const att=document.getElementById('sess-attempts');
+  if (started) started.textContent = window.sessionStart ? new Date(window.sessionStart).toLocaleTimeString() : '—';
+  if (ch) ch.textContent = currentChannel||'—';
+  if (att) att.textContent = s.attempts||0;
+};
+
+function getLockoutState() { try { return JSON.parse(sessionStorage.getItem('hl-admin-lockout')||'{}'); } catch { return {}; } }
+
 // ── HELPERS ──
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function fmtBytes(b) { if(!b)return'0 B'; if(b<1024)return b+' B'; if(b<1048576)return(b/1024).toFixed(1)+' KB'; return(b/1048576).toFixed(1)+' MB'; }
+
+// Boot: if saved config available, jump straight to channel screen after gate unlocks
+// (handled in checkSavedConfig via inline script above)
+// But we also need to init db if saved config found (done in IIFE above)
 </script>
 </body>
 </html>
